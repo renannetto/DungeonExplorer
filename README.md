@@ -1,4 +1,4 @@
-# DungeonExplorer
+# DungeonExplorer (procura-se sugestão de nomes)
 
 A ideia é um jogo de exploração de dungeons 2D feito usando a engine Phaser para Javascript.
 

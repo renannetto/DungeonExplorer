@@ -1,0 +1,15 @@
+{
+    "assets": {
+        "player_spritesheet": { "type": "spritesheet", "source": "assets/images/characters_spritesheet.png", "frame_width": 32, "frame_height": 64 },
+        "dungeon_tileset": { "type": "image", "source": "assets/images/dungeon_tileset.png" },
+        "dungeon_tilemap": { "type": "tilemap", "source": "assets/maps/example_map.json" },
+        "player": { "type": "prefab", "source": "assets/prefabs/player.json" }
+    },
+    "groups": [
+        "players"
+    ],
+    "map": {
+        "key": "dungeon_tilemap",
+        "tileset": "dungeon_tileset"
+    }
+}

@@ -5,10 +5,12 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
 		<title>Learn Game Development at ZENVA.com</title>
-		<script type="text/javascript" src="js/engine/phaser.js"></script>		
+		<script type="text/javascript" src="js/engine/phaser.js"></script>
+        <script src="js/engine/Utils.js"></script>
         <script src="js/engine/states/BootState.js"></script>
         <script src="js/engine/states/LoadingState.js"></script>
 		<script src="js/engine/states/GameState.js"></script>
+        <script src="js/engine/states/TiledState.js"></script>
         <script src="js/engine/prefabs/AssetLoader.js"></script>
         <script src="js/engine/prefabs/Prefab.js"></script>
         <script src="js/engine/prefabs/TilePrefab.js"></script>
@@ -16,9 +18,11 @@
         <script src="js/engine/scripts/Script.js"></script>
         <script src="js/engine/scripts/ScriptFactory.js"></script>
         
-        <script src="js/game/states/GameState.js"></script>
+        <script src="js/game/states/DungeonState.js"></script>
         <script src="js/game/prefabs/PrefabFactory.js"></script>
+        <script src="js/game/prefabs/Player.js"></script>
         <script src="js/game/scripts/ScriptFactory.js"></script>
+        <script src="js/game/scripts/PlayerMovement.js"></script>
         
 		<style>
 		  body {
@@ -31,12 +35,15 @@
 
 	<body>
         <script>
-            var game = new Phaser.Game(480, 320, Phaser.CANVAS);
+            var dimensions, game;
             
+            dimensions = Engine.get_landscape_dimensions(640, 480);
+            
+            game = new Phaser.Game(dimensions.width, dimensions.height, Phaser.CANVAS);
             game.state.add("BootState", new Engine.BootState());
             game.state.add("LoadingState", new Engine.LoadingState());
-            game.state.add("GameState", new DungeonExplorer.GameState());
-            game.state.start("BootState", true, false, "assets/levels/level1.json");
+            game.state.add("GameState", new DungeonExplorer.DungeonState());
+            game.state.start("BootState", true, false, "assets/levels/example_level.json");
         </script>
 	</body>
 </html>

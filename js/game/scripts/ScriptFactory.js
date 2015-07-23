@@ -5,6 +5,7 @@ DungeonExplorer.ScriptFactory = function (game_state) {
     "use strict";
     Engine.ScriptFactory.call(this, game_state);
     this.scripts = {
+        "player_movement": DungeonExplorer.PlayerMovement.prototype.constructor
     };
 };
 

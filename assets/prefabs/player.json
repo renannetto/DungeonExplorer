@@ -1,0 +1,13 @@
+{
+    "prefab": "player",
+    "type": "sprite",
+    "position_x": 0,
+    "position_y": 0,
+    "texture": "player_spritesheet",
+    "group": "players",
+    "scripts": {
+        "player_movement": {
+            "walking_speed": 0
+        }
+    }
+}
