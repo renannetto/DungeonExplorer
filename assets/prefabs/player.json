@@ -8,6 +8,12 @@
     "scripts": {
         "player_movement": {
             "walking_speed": 0
+        },
+        "player_attack": {
+            "pool": "shoots",
+            "prefab": "shoot",
+            "attack_rate": 5,
+            "shoot_speed": 300
         }
     }
 }

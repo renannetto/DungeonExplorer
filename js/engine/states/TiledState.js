@@ -26,13 +26,21 @@ Engine.TiledState.prototype.init = function (level_data) {
 
 Engine.TiledState.prototype.create = function () {
     "use strict";
-    var group_name, object_layer;
+    var group_name, object_layer, collision_tiles;
     
     this.layers = {};
     this.map.layers.forEach(function (layer) {
         this.layers[layer.name] = this.map.createLayer(layer.name);
         if (layer.properties.collision) {
-            this.map.setCollisionBetween(layer.properties.tiles_min, layer.properties.tiles_max, true, layer.name);
+            collision_tiles = [];
+            layer.data.forEach(function (data_row) {
+                data_row.forEach(function (tile) {
+                    if (tile.index > 0 && collision_tiles.indexOf(tile.index) === -1) {
+                        collision_tiles.push(tile.index);
+                    }
+                }, this);
+            }, this);
+            this.map.setCollision(collision_tiles, true, layer.name);
         }
     }, this);
     this.layers[this.map.layer.name].resizeWorld();

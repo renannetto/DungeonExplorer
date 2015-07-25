@@ -18,9 +18,7 @@
          "opacity":1,
          "properties":
             {
-             "collision":"true",
-             "tiles_max":"256",
-             "tiles_min":"1"
+             "collision":"true"
             },
          "type":"tilelayer",
          "visible":true,
@@ -38,7 +36,7 @@
                  "name":"player",
                  "properties":
                     {
-                     "player_movement.walking_speed":"200"
+                     "player_movement.walking_speed":"100"
                     },
                  "type":"player",
                  "visible":true,

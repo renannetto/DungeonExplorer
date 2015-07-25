@@ -313,8 +313,6 @@
  <layer name="collision" width="20" height="15">
   <properties>
    <property name="collision" value="true"/>
-   <property name="tiles_max" value="256"/>
-   <property name="tiles_min" value="1"/>
   </properties>
   <data>
    <tile gid="69"/>
@@ -622,7 +620,7 @@
  <objectgroup name="objects" width="20" height="15">
   <object name="player" type="player" gid="258" x="304" y="137">
    <properties>
-    <property name="player_movement.walking_speed" value="200"/>
+    <property name="player_movement.walking_speed" value="100"/>
    </properties>
   </object>
  </objectgroup>

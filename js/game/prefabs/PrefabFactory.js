@@ -5,7 +5,8 @@ DungeonExplorer.PrefabFactory = function (game_state) {
     "use strict";
     Engine.PrefabFactory.call(this, game_state);
     this.prefabs = {
-        "player": DungeonExplorer.Player.prototype.constructor
+        "player": DungeonExplorer.Player.prototype.constructor,
+        "shoot": DungeonExplorer.Shoot.prototype.constructor
     };
     this.script_factory = new DungeonExplorer.ScriptFactory(game_state);
 };
