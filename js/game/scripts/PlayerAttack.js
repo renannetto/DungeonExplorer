@@ -32,16 +32,27 @@ DungeonExplorer.PlayerAttack.prototype.shoot = function () {
     "use strict";
     var prefab, player_direction;
 
-    prefab = this.create_object(this.prefab.x, this.prefab.y);
+    prefab = this.create_object(this.prefab.sprite.x, this.prefab.sprite.y);
 
     player_direction = this.prefab.scripts.player_movement.direction;
-    if (player_direction.x !== 0) {
-        prefab.scale.setTo(player_direction.x, 1);
-        prefab.angle = 0;
-        prefab.body.velocity.x = player_direction.x * this.shoot_speed;
-    } else if (player_direction.y !== 0) {
-        prefab.scale.setTo(1, 1);
-        prefab.angle = player_direction.y * 90;
-        prefab.body.velocity.y = player_direction.y * this.shoot_speed;
+    prefab.sprite.scale.setTo(1, 1);
+    prefab.sprite.angle = 0;
+    switch (player_direction) {
+    case "left":
+        prefab.sprite.scale.setTo(-1, 1);
+        prefab.sprite.body.velocity.x = -this.shoot_speed;
+        break;
+    case "right":
+        prefab.sprite.scale.setTo(1, 1);
+        prefab.sprite.body.velocity.x = this.shoot_speed;
+        break;
+    case "up":
+        prefab.sprite.angle = -90;
+        prefab.sprite.body.velocity.y = -this.shoot_speed;
+        break;
+    case "down":
+        prefab.sprite.angle = 90;
+        prefab.sprite.body.velocity.y = this.shoot_speed;
+        break;
     }
 };

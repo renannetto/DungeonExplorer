@@ -10,6 +10,10 @@ Engine.Script.prototype.update = function () {
     "use strict";
 };
 
+Engine.Script.prototype.kill = function () {
+    "use strict";
+};
+
 Engine.Script.prototype.reset = function () {
     "use strict";
 };

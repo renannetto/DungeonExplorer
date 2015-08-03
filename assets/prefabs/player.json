@@ -1,18 +1,39 @@
 {
-    "prefab": "player",
-    "type": "sprite",
-    "position_x": 0,
-    "position_y": 0,
-    "texture": "player_spritesheet",
-    "group": "players",
+    "sprite": {
+        "type": "sprite",
+        "texture": "player_spritesheet",
+        "group": "players"    
+    },
     "scripts": {
         "player_movement": {
-            "walking_speed": 0
+            "walking_speed": 0,
+            "walking_down_animation": {
+                "frames": [0, 1, 2],
+                "fps": 6
+            },
+            "walking_left_animation": {
+                "frames": [12, 13, 14],
+                "fps": 6
+            },
+            "walking_right_animation": {
+                "frames": [24, 25, 26],
+                "fps": 6
+            },
+            "walking_up_animation": {
+                "frames": [36, 37, 38],
+                "fps": 6
+            },
+            "stopped_frames": {
+                "down": 1,
+                "left": 13,
+                "right": 25,
+                "up": 37
+            }
         },
         "player_attack": {
-            "pool": "shoots",
-            "prefab": "shoot",
-            "attack_rate": 5,
+            "pool": "attacks",
+            "prefab": "attack",
+            "attack_rate": 1,
             "shoot_speed": 300
         }
     }

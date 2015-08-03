@@ -6,7 +6,8 @@ DungeonExplorer.ScriptFactory = function (game_state) {
     Engine.ScriptFactory.call(this, game_state);
     this.scripts = {
         "player_movement": DungeonExplorer.PlayerMovement.prototype.constructor,
-        "player_attack": DungeonExplorer.PlayerAttack.prototype.constructor
+        "player_attack": DungeonExplorer.PlayerAttack.prototype.constructor,
+        "attack_movement": DungeonExplorer.AttackMovement.prototype.constructor
     };
 };
 

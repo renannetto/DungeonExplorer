@@ -13,7 +13,7 @@ DungeonExplorer.DungeonState.prototype.constructor = DungeonExplorer.DungeonStat
 DungeonExplorer.DungeonState.prototype.init = function (level_data) {
     "use strict";
     Engine.TiledState.prototype.init.call(this, level_data);
-    this.prefab_factory = new DungeonExplorer.PrefabFactory(this);
+    this.prefab_factory = new Engine.PrefabFactory(this, new DungeonExplorer.ScriptFactory(this));
     
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
     this.game.physics.arcade.gravity.y = 0;
@@ -23,11 +23,5 @@ DungeonExplorer.DungeonState.prototype.create = function () {
     "use strict";
     Engine.TiledState.prototype.create.call(this);
     
-    this.game.camera.follow(this.prefabs.player);
-};
-
-DungeonExplorer.DungeonState.prototype.render = function () {
-    "use strict";
-    
-    this.game.debug.body(this.prefabs.player);
+    this.game.camera.follow(this.prefabs.player.sprite);
 };

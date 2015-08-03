@@ -1,0 +1,15 @@
+{
+    "sprite": {
+        "type": "sprite",
+        "texture": "bluefire_spritesheet",
+        "group": "attacks"  
+    },
+    "scripts": {
+        "attack_movement": {
+            "moving_animation": {
+                "frames": [0, 1, 2],
+                "fps": 10
+            }
+        }
+    }
+}
