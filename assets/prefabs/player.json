@@ -23,12 +23,7 @@
                 "frames": [36, 37, 38],
                 "fps": 6
             },
-            "stopped_frames": {
-                "down": 1,
-                "left": 13,
-                "right": 25,
-                "up": 37
-            }
+            "stopped_frames": [1, 13, 25, 37, 1]
         },
         "player_attack": {
             "pool": "attacks",

@@ -4,7 +4,7 @@ var DungeonExplorer = DungeonExplorer || {};
 DungeonExplorer.AttackMovement = function (game_state, prefab, parameters) {
     "use strict";
     Engine.Script.call(this, game_state, prefab);
-    
+
     this.game_state.game.physics.arcade.enable(this.prefab.sprite);
     this.prefab.sprite.checkWorldBounds = true;
     this.prefab.sprite.outOfBoundsKill = true;

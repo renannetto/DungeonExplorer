@@ -11,20 +11,25 @@ DungeonExplorer.PlayerAttack = function (game_state, prefab, parameters) {
 
     this.attack_timer = this.game_state.game.time.create();
     this.attack_timer.loop(Phaser.Timer.SECOND / this.attack_rate, this.shoot, this);
-    this.attack_timer.start();
 };
 
 DungeonExplorer.PlayerAttack.prototype = Object.create(Engine.CreatePrefabFromPool.prototype);
 DungeonExplorer.PlayerAttack.prototype.constructor = DungeonExplorer.PlayerAttack;
 
+DungeonExplorer.PlayerAttack.prototype.kill = function () {
+    "use strict";
+    this.attack_timer.stop();
+};
+
 DungeonExplorer.PlayerAttack.prototype.update = function () {
     "use strict";
     if (this.game_state.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
-        if (this.attack_timer.paused) {
-            this.attack_timer.resume();
+        if (!this.attack_timer.running) {
+            this.shoot();
+            this.attack_timer.start();
         }
     } else {
-        this.attack_timer.pause();
+        this.attack_timer.stop(false);
     }
 };
 
