@@ -7,10 +7,10 @@ Engine.ScriptFactory = function (game_state) {
     };
 };
 
-Engine.ScriptFactory.prototype.create_script = function (prefab, script_name, script_parameters) {
+Engine.ScriptFactory.prototype.create_script = function (prefab, script_name, script_properties) {
     "use strict";
     if (this.scripts[script_name]) {
-        var script = new this.scripts[script_name](this.game_state, prefab, script_parameters);
+        var script = new this.scripts[script_name](this.game_state, prefab, script_properties);
         return script;
     }
 };

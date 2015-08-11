@@ -67,18 +67,18 @@ Engine.TiledState.prototype.create = function () {
 
 Engine.TiledState.prototype.create_object = function (object) {
     "use strict";
-    var prefab_json, prefab_position, prefab, parameter, script_name, parameter_name;
+    var prefab_json, prefab_position, prefab, property, script_name, property_name;
     
     prefab_json = JSON.parse(this.game.cache.getText(object.type));
     prefab_position = {"x": object.x, "y": object.y};
     prefab = this.prefab_factory.create_prefab(object.name, prefab_position, prefab_json);
     prefab.reset(prefab_position.x, prefab_position.y - prefab.sprite.height);
     
-    for (parameter in object.properties) {
-        if (object.properties.hasOwnProperty(parameter)) {
-            script_name = parameter.split(".")[0];
-            parameter_name = parameter.split(".")[1];
-            prefab.scripts[script_name][parameter_name] = object.properties[parameter];
+    for (property in object.properties) {
+        if (object.properties.hasOwnProperty(property)) {
+            script_name = property.split(".")[0];
+            property_name = property.split(".")[1];
+            prefab.scripts[script_name][property_name] = object.properties[property];
         }
     }
 };

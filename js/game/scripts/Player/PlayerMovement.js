@@ -1,17 +1,17 @@
 var Engine = Engine || {};
 var DungeonExplorer = DungeonExplorer || {};
 
-DungeonExplorer.PlayerMovement = function (game_state, prefab, parameters) {
+DungeonExplorer.PlayerMovement = function (game_state, prefab, properties) {
     "use strict";
-    Engine.Script.call(this, game_state, prefab, parameters);
+    Engine.Script.call(this, game_state, prefab, properties);
 
-    this.walking_speed = parameters.walking_speed;
-    this.prefab.sprite.animations.add("walking_down", parameters.walking_down_animation.frames, parameters.walking_down_animation.fps, true);
-    this.prefab.sprite.animations.add("walking_left", parameters.walking_left_animation.frames, parameters.walking_left_animation.fps, true);
-    this.prefab.sprite.animations.add("walking_right", parameters.walking_right_animation.frames, parameters.walking_right_animation.fps, true);
-    this.prefab.sprite.animations.add("walking_up", parameters.walking_up_animation.frames, parameters.walking_up_animation.fps, true);
+    this.walking_speed = properties.walking_speed;
+    this.prefab.sprite.animations.add("walking_down", properties.walking_down_animation.frames, properties.walking_down_animation.fps, true);
+    this.prefab.sprite.animations.add("walking_left", properties.walking_left_animation.frames, properties.walking_left_animation.fps, true);
+    this.prefab.sprite.animations.add("walking_right", properties.walking_right_animation.frames, properties.walking_right_animation.fps, true);
+    this.prefab.sprite.animations.add("walking_up", properties.walking_up_animation.frames, properties.walking_up_animation.fps, true);
 
-    this.stopped_frames = parameters.stopped_frames;
+    this.stopped_frames = properties.stopped_frames;
 
     this.game_state.game.physics.arcade.enable(this.prefab.sprite);
     this.prefab.sprite.body.allowGravity = false;
