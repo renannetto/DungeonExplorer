@@ -7,7 +7,7 @@ DungeonExplorer.ReceiveDamage = function (game_state, prefab, properties) {
 
     this.health = properties.health;
 
-    this.bouncing_direction = [{"x": -1, "y": 0}, {"x": 1, "y": 0}, {"x": 0, "y": -1}, {"x": 0, "y": 1}];
+    this.game_state.game.physics.arcade.enable(this.prefab.sprite);
 };
 
 DungeonExplorer.ReceiveDamage.prototype = Object.create(Engine.PrefabMovement.prototype);
@@ -25,14 +25,25 @@ DungeonExplorer.ReceiveDamage.prototype.update = function () {
 
 DungeonExplorer.ReceiveDamage.prototype.damage = function (attacked, attack) {
     "use strict";
-    var attack_prefab, damage;
+    var attacked_prefab, attack_prefab, damage;
+    attacked_prefab = this.game_state.prefabs[attacked.name];
     attack_prefab = this.game_state.prefabs[attack.name];
 
-    this.move(this.prefab.sprite.body.facing, this.properties.bouncing_speed);
+    if (attack_prefab.sprite.body.facing) {
+        this.prefab.sprite.x += this.direction[attack_prefab.sprite.body.facing].x * this.properties.bouncing;
+        this.prefab.sprite.y += this.direction[attack_prefab.sprite.body.facing].y * this.properties.bouncing;
+    } else {
+        this.prefab.sprite.x += -1 * this.direction[attacked_prefab.sprite.body.facing].x * this.properties.bouncing;
+        this.prefab.sprite.y += -1 * this.direction[attacked_prefab.sprite.body.facing].y * this.properties.bouncing;
+    }
 
-    damage = attack.scripts.attack_damage.damage;
+    damage = attack_prefab.scripts.cause_damage.properties.damage;
     this.health -= damage;
     if (this.health <= 0) {
         this.prefab.kill();
+    }
+
+    if (attack_prefab.scripts.cause_damage.properties.destroy) {
+        attack_prefab.kill();
     }
 };

@@ -623,5 +623,6 @@
     <property name="player_movement.walking_speed" value="100"/>
    </properties>
   </object>
+  <object name="enemy0" type="enemy" gid="267" x="131" y="135"/>
  </objectgroup>
 </map>

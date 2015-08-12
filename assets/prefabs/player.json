@@ -29,6 +29,11 @@
             "pool": "attacks",
             "prefab": "attack",
             "attack_rate": 1
+        },
+        "receive_damage": {
+            "attack_group": "enemies",
+            "health": 10,
+            "bouncing": 25
         }
     }
 }

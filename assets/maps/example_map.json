@@ -43,6 +43,20 @@
                  "width":0,
                  "x":304,
                  "y":137
+                },
+                {
+                 "gid":267,
+                 "height":0,
+                 "name":"enemy0",
+                 "properties":
+                    {
+
+                    },
+                 "type":"enemy",
+                 "visible":true,
+                 "width":0,
+                 "x":131,
+                 "y":135
                 }],
          "opacity":1,
          "type":"objectgroup",

@@ -1,0 +1,21 @@
+{
+    "sprite": {
+        "type": "sprite",
+        "texture": "player_spritesheet",
+        "group": "enemies",
+        "properties": {
+            "frame": 10
+        }
+    },
+    "scripts": {
+        "receive_damage": {
+            "attack_group": "attacks",
+            "health": 10,
+            "bouncing": 25
+        },
+        "cause_damage": {
+            "damage": 1,
+            "destroy": false
+        }
+    }
+}

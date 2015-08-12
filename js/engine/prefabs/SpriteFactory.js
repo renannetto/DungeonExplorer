@@ -8,14 +8,8 @@ Engine.SpriteFactory = function (game_state) {
 
 Engine.SpriteFactory.prototype.create_sprite = function (position, params) {
     "use strict";
-    var sprite, texture;
-    if (!params.texture || typeof (params.texture) === "string") {
-        texture = params.texture;
-    } else {
-        texture = this.game_state.add.bitmapData(params.texture.width, params.texture.height);
-        texture.ctx.fillStyle = params.texture.color;
-        texture.ctx.fillRect(0, 0, params.texture.width, params.texture.height);
-    }
+    var sprite, texture, property;
+    texture = this.parse_texture(params.texture);
     switch (params.type) {
     case "sprite":
         sprite = new Phaser.Sprite(this.game_state.game, position.x, position.y, texture, params.frame);
@@ -27,11 +21,31 @@ Engine.SpriteFactory.prototype.create_sprite = function (position, params) {
         sprite = new Phaser.Text(this.game_state.game, position.x, position.y, params.text, params.style);
         break;
     }
+
     if (params.group) {
         this.game_state.groups[params.group].add(sprite);
     } else {
         this.game_state.game.add.existing(sprite);
     }
     
+    for (property in params.properties) {
+        if (params.properties.hasOwnProperty(property)) {
+            sprite[property] = params.properties[property];
+        }
+    }
+
     return sprite;
+};
+
+Engine.SpriteFactory.prototype.parse_texture = function (texture_properties) {
+    "use strict";
+    var texture;
+    if (!texture_properties || typeof (texture_properties) === "string") {
+        texture = texture_properties;
+    } else {
+        texture = this.game_state.add.bitmapData(texture_properties.width, texture_properties.height);
+        texture.ctx.fillStyle = texture_properties.color;
+        texture.ctx.fillRect(0, 0, texture_properties.width, texture_properties.height);
+    }
+    return texture;
 };

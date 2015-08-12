@@ -5,11 +5,13 @@
         "dungeon_tileset": { "type": "image", "source": "assets/images/dungeon_tileset.png" },
         "dungeon_tilemap": { "type": "tilemap", "source": "assets/maps/example_map.json" },
         "player": { "type": "prefab", "source": "assets/prefabs/player.json" },
+        "enemy": { "type": "prefab", "source": "assets/prefabs/enemy.json" },
         "attack": { "type": "prefab", "source": "assets/prefabs/attack.json" }
     },
     "groups": [
         "players",
-        "attacks"
+        "attacks",
+        "enemies"
     ],
     "map": {
         "key": "dungeon_tilemap",
