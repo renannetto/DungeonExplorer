@@ -1,11 +1,9 @@
 var Phaser = Phaser || {};
 var Engine = Engine || {};
 
-Engine.SpawnPrefab = function (game_state, prefab, parameters) {
+Engine.SpawnPrefab = function (game_state, prefab, properties) {
     "use strict";
-    Engine.CreatePrefabFromPool.call(this, game_state, prefab, parameters);
-    
-    this.spawn_interval = parameters.spawn_interval;
+    Engine.CreatePrefabFromPool.call(this, game_state, prefab, properties);
     
     this.spawn_timer = this.game_state.game.time.create();
     this.spawn_timer.loop(Phaser.Timer.SECOND * this.spawn_interval, this.spawn_object, this);

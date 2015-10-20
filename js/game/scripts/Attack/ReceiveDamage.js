@@ -5,7 +5,7 @@ DungeonExplorer.ReceiveDamage = function (game_state, prefab, properties) {
     "use strict";
     Engine.PrefabMovement.call(this, game_state, prefab, properties);
 
-    this.health = properties.health;
+    this.initial_health = this.health;
 
     this.game_state.game.physics.arcade.enable(this.prefab.sprite);
 };
@@ -15,12 +15,12 @@ DungeonExplorer.ReceiveDamage.prototype.constructor = DungeonExplorer.ReceiveDam
 
 DungeonExplorer.ReceiveDamage.prototype.reset = function () {
     "use strict";
-    this.health = this.properties.health;
+    this.health = this.initial_health;
 };
 
 DungeonExplorer.ReceiveDamage.prototype.update = function () {
     "use strict";
-    this.game_state.game.physics.arcade.overlap(this.prefab.sprite, this.game_state.groups[this.properties.attack_group], this.damage, null, this);
+    this.game_state.game.physics.arcade.overlap(this.prefab.sprite, this.game_state.groups[this.attack_group], this.damage, null, this);
 };
 
 DungeonExplorer.ReceiveDamage.prototype.damage = function (attacked, attack) {
@@ -30,20 +30,20 @@ DungeonExplorer.ReceiveDamage.prototype.damage = function (attacked, attack) {
     attack_prefab = this.game_state.prefabs[attack.name];
 
     if (attack_prefab.sprite.body.facing) {
-        this.prefab.sprite.x += this.direction[attack_prefab.sprite.body.facing].x * this.properties.bouncing;
-        this.prefab.sprite.y += this.direction[attack_prefab.sprite.body.facing].y * this.properties.bouncing;
+        this.prefab.sprite.x += this.direction[attack_prefab.sprite.body.facing].x * this.bouncing;
+        this.prefab.sprite.y += this.direction[attack_prefab.sprite.body.facing].y * this.bouncing;
     } else {
-        this.prefab.sprite.x += -1 * this.direction[attacked_prefab.sprite.body.facing].x * this.properties.bouncing;
-        this.prefab.sprite.y += -1 * this.direction[attacked_prefab.sprite.body.facing].y * this.properties.bouncing;
+        this.prefab.sprite.x += -1 * this.direction[attacked_prefab.sprite.body.facing].x * this.bouncing;
+        this.prefab.sprite.y += -1 * this.direction[attacked_prefab.sprite.body.facing].y * this.bouncing;
     }
 
-    damage = attack_prefab.scripts.cause_damage.properties.damage;
+    damage = attack_prefab.scripts.cause_damage.damage;
     this.health -= damage;
     if (this.health <= 0) {
         this.prefab.kill();
     }
 
-    if (attack_prefab.scripts.cause_damage.properties.destroy) {
+    if (attack_prefab.scripts.cause_damage.destroy) {
         attack_prefab.kill();
     }
 };

@@ -20,7 +20,7 @@ DungeonExplorer.AttackMovement.prototype.update = function () {
     "use strict";
     this.game_state.game.physics.arcade.collide(this.prefab.sprite, this.game_state.layers.collision, this.prefab.kill, null, this.prefab);
 
-    this.move(this.prefab.sprite.body.facing, this.properties.speed);
+    this.move(this.prefab.sprite.body.facing, this.speed);
 
     this.prefab.sprite.scale.setTo(1, 1);
     this.prefab.sprite.angle = 0;

@@ -2,9 +2,14 @@ var Engine = Engine || {};
 
 Engine.Script = function (game_state, prefab, properties) {
     "use strict";
+    var property;
     this.game_state = game_state;
     this.prefab = prefab;
-    this.properties = properties;
+    for (property in properties) {
+        if (properties.hasOwnProperty(property)) {
+            this[property] = properties[property];
+        }
+    }
 };
 
 Engine.Script.prototype.update = function () {

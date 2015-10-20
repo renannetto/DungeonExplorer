@@ -1,8 +1,11 @@
 {
     "sprite": {
         "type": "sprite",
-        "texture": "player_spritesheet",
+        "texture": {"type": "asset_key", "asset_key": "player_spritesheet"},
         "group": "enemies",
+        "body": {
+            "physics": "arcade"
+        },
         "properties": {
             "frame": 10
         }
@@ -16,6 +19,12 @@
         "cause_damage": {
             "damage": 1,
             "destroy": false
+        },
+        "enemy_movement": {
+            "walking_speed": 100,
+            "walking_radius": 100,
+            "directions": [{"x": 0, "y": 1}, {"x": 1, "y": 0}, {"x": 0, "y": -1}, {"x": -1, "y": 0}],
+            "current_direction_index": 0
         }
     }
 }

@@ -1,11 +1,9 @@
 var Engine = Engine || {};
 
-Engine.CreatePrefabFromPool = function (game_state, prefab, parameters) {
+Engine.CreatePrefabFromPool = function (game_state, prefab, properties) {
     "use strict";
-    Engine.Script.call(this, game_state, prefab);
-    
-    this.pool = parameters.pool;
-    this.prefab_parameters = JSON.parse(this.game_state.cache.getText(parameters.prefab));
+    Engine.Script.call(this, game_state, prefab, properties);
+    this.prefab_parameters = JSON.parse(this.game_state.cache.getText(this.prefab_to_create));
     
     this.created_prefabs = 0;
 };

@@ -1,8 +1,11 @@
 {
     "sprite": {
         "type": "sprite",
-        "texture": "bluefire_spritesheet",
-        "group": "attacks"  
+        "texture": {"type": "asset_key", "asset_key": "bluefire_spritesheet"},
+        "group": "attacks",
+        "body": {
+            "physics": "arcade"
+        }
     },
     "scripts": {
         "attack_movement": {

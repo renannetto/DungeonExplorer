@@ -1,8 +1,11 @@
 {
     "sprite": {
         "type": "sprite",
-        "texture": "player_spritesheet",
-        "group": "players"    
+        "texture": {"type": "asset_key", "asset_key": "player_spritesheet"},
+        "group": "players",
+        "body": {
+            "physics": "arcade"
+        }
     },
     "scripts": {
         "player_movement": {
@@ -27,7 +30,7 @@
         },
         "player_attack": {
             "pool": "attacks",
-            "prefab": "attack",
+            "prefab_to_create": "attack",
             "attack_rate": 1
         },
         "receive_damage": {

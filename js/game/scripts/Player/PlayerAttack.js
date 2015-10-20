@@ -7,7 +7,7 @@ DungeonExplorer.PlayerAttack = function (game_state, prefab, properties) {
     Engine.CreatePrefabFromPool.call(this, game_state, prefab, properties);
 
     this.attack_timer = this.game_state.game.time.create();
-    this.attack_timer.loop(Phaser.Timer.SECOND / properties.attack_rate, this.shoot, this);
+    this.attack_timer.loop(Phaser.Timer.SECOND / this.attack_rate, this.shoot, this);
 };
 
 DungeonExplorer.PlayerAttack.prototype = Object.create(Engine.CreatePrefabFromPool.prototype);
