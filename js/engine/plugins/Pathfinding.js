@@ -14,6 +14,8 @@ Engine.Pathfinding.prototype.constructor = Engine.Pathfinding;
 Engine.Pathfinding.prototype.init = function (world_grid, acceptable_tiles, tile_dimensions) {
     "use strict";
     var grid_row, grid_column, grid_indices;
+    this.grid_dimensions = {row: world_grid.length, column: world_grid[0].length};
+
     grid_indices = [];
     for (grid_row = 0; grid_row < world_grid.length; grid_row += 1) {
         grid_indices[grid_row] = [];
@@ -35,18 +37,30 @@ Engine.Pathfinding.prototype.find_path = function (origin, target, callback, con
     origin_coord = this.get_coord_from_point(origin);
     target_coord = this.get_coord_from_point(target);
 
-    this.easy_star.findPath(origin_coord.row, origin_coord.column, target_coord.row, target_coord.column, this.call_callback_function.bind(this, callback, context));
-    this.easy_star.calculate();
+    if (!this.outside_grid(origin_coord) && !this.outside_grid(target_coord)) {
+        this.easy_star.findPath(origin_coord.column, origin_coord.row, target_coord.column, target_coord.row, this.call_callback_function.bind(this, callback, context));
+        this.easy_star.calculate();
+        return true;
+    } else {
+        return false;
+    }
 };
 
 Engine.Pathfinding.prototype.call_callback_function = function (callback, context, path) {
     "use strict";
     var path_positions;
     path_positions = [];
-    path.forEach(function (path_coord) {
-        path_positions.push(this.get_point_from_coord({row: path_coord.x, column: path_coord.y}));
-    }, this);
+    if (path !== null) {
+        path.forEach(function (path_coord) {
+            path_positions.push(this.get_point_from_coord({row: path_coord.y, column: path_coord.x}));
+        }, this);
+    }
     callback.call(context, path_positions);
+};
+
+Engine.Pathfinding.prototype.outside_grid = function (coord) {
+    "use strict";
+    return coord.row < 0 || coord.row > this.grid_dimensions.row - 1 || coord.column < 0 || coord.column > this.grid_dimensions.column - 1;
 };
 
 Engine.Pathfinding.prototype.get_coord_from_point = function (point) {

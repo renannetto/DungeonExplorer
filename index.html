@@ -49,7 +49,7 @@
             
             dimensions = Engine.get_landscape_dimensions(640, 480);
             
-            game = new Phaser.Game(dimensions.width, dimensions.height, Phaser.CANVAS);
+            game = new Phaser.Game(640, 480, Phaser.CANVAS);
             game.state.add("BootState", new Engine.BootState());
             game.state.add("LoadingState", new Engine.LoadingState());
             game.state.add("GameState", new DungeonExplorer.DungeonState());

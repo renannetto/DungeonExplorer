@@ -29,3 +29,13 @@ DungeonExplorer.DungeonState.prototype.create = function () {
     
     this.game.camera.follow(this.prefabs.player.sprite);
 };
+
+DungeonExplorer.DungeonState.prototype.render = function () {
+    "use strict";
+    var prefab_name;
+    for (prefab_name in this.prefabs) {
+        if (this.prefabs.hasOwnProperty(prefab_name)) {
+            this.game.debug.body(this.prefabs[prefab_name].sprite);
+        }
+    }
+};
