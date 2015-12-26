@@ -27,7 +27,9 @@ Engine.LoadingState.prototype.preload = function () {
         }
     }
 
-    //this.load.text("user_input", this.level_data.user_input);
+    if (this.level_data.user_input) {
+        this.load.text("user_input", this.level_data.user_input);
+    }
 };
 
 Engine.LoadingState.prototype.create = function () {

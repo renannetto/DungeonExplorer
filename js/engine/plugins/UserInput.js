@@ -1,7 +1,7 @@
 var Phaser = Phaser || {};
 var Engine = Engine || {};
 
-Engine.UserInput = function (game, parent, game_state, user_input_data) {
+Engine.UserInput = function (game, parent) {
     "use strict";
     Phaser.Plugin.call(this, game, parent);
 };
@@ -13,7 +13,7 @@ Engine.UserInput.prototype.init = function (game_state, user_input_data) {
     "use strict";
     var input_type, key, key_code;
     this.game_state = game_state;
-    this.user_inputs = {"keydown": {}, "keyup": {}, "keypress": {}};
+    this.user_inputs = {"keydown": {}, "keyup": {}};
 
     for (input_type in user_input_data) {
         if (user_input_data.hasOwnProperty(input_type)) {
@@ -26,7 +26,7 @@ Engine.UserInput.prototype.init = function (game_state, user_input_data) {
         }
     }
 
-    this.game.input.keyboard.addCallbacks(this, this.process_input, this.process_input, this.process_input);
+    this.game.input.keyboard.addCallbacks(this, this.process_input, this.process_input, null);
 };
 
 Engine.UserInput.prototype.process_input = function (event) {

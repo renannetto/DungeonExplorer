@@ -21,6 +21,8 @@ DungeonExplorer.DungeonState.prototype.init = function (level_data) {
 
     tile_dimensions = new Phaser.Point(this.map.tileWidth, this.map.tileHeight);
     this.pathfinding = this.game.plugins.add(Engine.Pathfinding, this.map.layers[1].data, [-1], tile_dimensions);
+
+    this.user_input = this.game.plugins.add(Engine.UserInput, this, JSON.parse(this.game.cache.getText("user_input")));
 };
 
 DungeonExplorer.DungeonState.prototype.create = function () {

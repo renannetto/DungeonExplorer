@@ -16,5 +16,6 @@
     "map": {
         "key": "dungeon_tilemap",
         "tileset": "dungeon_tileset"
-    }
+    },
+    "user_input": "assets/levels/user_input.json"
 }

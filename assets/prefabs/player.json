@@ -10,7 +10,7 @@
     },
     "scripts": {
         "player_movement": {
-            "walking_speed": 0,
+            "walking_speed": 100,
             "walking_down_animation": {
                 "frames": [0, 1, 2],
                 "fps": 6
@@ -34,10 +34,11 @@
             "prefab_to_create": "attack",
             "attack_rate": 1
         },
-        "receive_damage": {
+        "player_health": {
             "attack_group": "enemies",
             "health": 10,
-            "bouncing": 25
+            "bouncing": 5,
+            "tween_duration": 0.2
         }
     }
 }
