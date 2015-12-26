@@ -1,0 +1,38 @@
+{
+    "keydown": {
+        "W": {
+            "callback": "player.player_movement.change_movement",
+            "args": [0, -1, true]
+        },
+        "S": {
+            "callback": "player.player_movement.change_movement",
+            "args": [0, 1, true]
+        },
+        "A": {
+            "callback": "player.player_movement.change_movement",
+            "args": [-1, 0, true]
+        },
+        "D": {
+            "callback": "player.player_movement.change_movement",
+            "args": [1, 0, true]
+        }
+    },
+    "keyup": {
+        "W": {
+            "callback": "player.player_movement.change_movement",
+            "args": [0, -1, false]
+        },
+        "S": {
+            "callback": "player.player_movement.change_movement",
+            "args": [0, 1, false]
+        },
+        "A": {
+            "callback": "player.player_movement.change_movement",
+            "args": [-1, 0, false]
+        },
+        "D": {
+            "callback": "player.player_movement.change_movement",
+            "args": [1, 0, false]
+        }
+    }
+}

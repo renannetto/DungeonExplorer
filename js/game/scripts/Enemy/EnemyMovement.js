@@ -6,7 +6,7 @@ DungeonExplorer.EnemyMovement = function (game_state, prefab, properties) {
     "use strict";
     Engine.PrefabMovement.call(this, game_state, prefab, properties);
 
-    this.prefab.sprite.scale.setTo(1, 0.5);
+    //this.prefab.sprite.scale.setTo(1, 0.5);
 
     this.path = [];
     this.path_step = -1;
@@ -14,6 +14,7 @@ DungeonExplorer.EnemyMovement = function (game_state, prefab, properties) {
     this.find_next_path();
 
     this.prefab.sprite.body.setSize(24, 24, 0, 8);
+    this.prefab.sprite.anchor.setTo(0.5, 0.75);
 };
 
 DungeonExplorer.EnemyMovement.prototype = Object.create(Engine.PrefabMovement.prototype);
