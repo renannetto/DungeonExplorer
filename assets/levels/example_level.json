@@ -9,9 +9,9 @@
         "attack": { "type": "prefab", "source": "assets/prefabs/attack.json" }
     },
     "groups": [
-        "players",
+        "enemies",
         "attacks",
-        "enemies"
+        "players"
     ],
     "map": {
         "key": "dungeon_tilemap",

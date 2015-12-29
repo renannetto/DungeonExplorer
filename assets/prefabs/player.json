@@ -11,23 +11,42 @@
     "scripts": {
         "player_movement": {
             "walking_speed": 100,
-            "walking_down_animation": {
-                "frames": [0, 1, 2],
-                "fps": 6
+            "walking_states": {
+                "walk_left": {
+                    "frames": [12, 13, 14],
+                    "fps": 6,
+                    "standing_state": "standing_left"
+                },
+                "walk_right": {
+                    "frames": [24, 25, 26],
+                    "fps": 6,
+                    "standing_state": "standing_right"
+                },
+                "walk_up": {
+                    "frames": [36, 37, 38],
+                    "fps": 6,
+                    "standing_state": "standing_up"
+                },
+                "walk_down": {
+                    "frames": [0, 1, 2],
+                    "fps": 6,
+                    "standing_state": "standing_down"
+                }
             },
-            "walking_left_animation": {
-                "frames": [12, 13, 14],
-                "fps": 6
-            },
-            "walking_right_animation": {
-                "frames": [24, 25, 26],
-                "fps": 6
-            },
-            "walking_up_animation": {
-                "frames": [36, 37, 38],
-                "fps": 6
-            },
-            "stopped_frames": [1, 13, 25, 37, 1]
+            "standing_states": {
+                "standing_left": {
+                    "frame": 13
+                },
+                "standing_right": {
+                    "frame": 25
+                },
+                "standing_up": {
+                    "frame": 37
+                },
+                "standing_down": {
+                    "frame": 1
+                }
+            }
         },
         "player_attack": {
             "pool": "attacks",
@@ -37,7 +56,7 @@
         "player_health": {
             "attack_group": "enemies",
             "health": 10,
-            "bouncing": 5,
+            "bouncing": 10,
             "tween_duration": 0.2
         }
     }

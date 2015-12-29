@@ -4,6 +4,7 @@ var DungeonExplorer = DungeonExplorer || {};
 
 DungeonExplorer.EnemyMovement = function (game_state, prefab, properties) {
     "use strict";
+    var walking_state_name, walking_state, standing_state_name, standing_state;
     Engine.PrefabMovement.call(this, game_state, prefab, properties);
 
     //this.prefab.sprite.scale.setTo(1, 0.5);
@@ -15,6 +16,31 @@ DungeonExplorer.EnemyMovement = function (game_state, prefab, properties) {
 
     this.prefab.sprite.body.setSize(24, 24, 0, 8);
     this.prefab.sprite.anchor.setTo(0.5, 0.75);
+
+    this.animation_state_machine = new Engine.StateMachine();
+
+    for (walking_state_name in this.walking_states) {
+        if (this.walking_states.hasOwnProperty(walking_state_name)) {
+            walking_state = new DungeonExplorer.WalkingState(walking_state_name, this.prefab, walking_state_name, this.walking_states[walking_state_name].frames, this.walking_states[walking_state_name].fps, true, this.walking_states[walking_state_name].standing_state);
+            this.animation_state_machine.add_state(walking_state_name, walking_state);
+        }
+    }
+
+    for (standing_state_name in this.standing_states) {
+        if (this.standing_states.hasOwnProperty(standing_state_name)) {
+            standing_state = new DungeonExplorer.StandingState(standing_state_name, this.prefab, this.standing_states[standing_state_name].frame);
+            this.animation_state_machine.add_state(standing_state_name, standing_state);
+        }
+    }
+
+    this.animation_state_machine.set_initial_state("standing_down");
+
+    this.commands = {};
+    this.commands.walk_left = new Engine.Command("walk", {direction: {x: -1, y: 0}});
+    this.commands.walk_right = new Engine.Command("walk", {direction: {x: 1, y: 0}});
+    this.commands.walk_up = new Engine.Command("walk", {direction: {x: 0, y: -1}});
+    this.commands.walk_down = new Engine.Command("walk", {direction: {x: 0, y: 1}});
+    this.commands.stop = new Engine.Command("stop", {});
 };
 
 DungeonExplorer.EnemyMovement.prototype = Object.create(Engine.PrefabMovement.prototype);
@@ -36,6 +62,16 @@ DungeonExplorer.EnemyMovement.prototype.update = function () {
             velocity.normalize();
             this.prefab.sprite.body.velocity.x = velocity.x * this.walking_speed;
             this.prefab.sprite.body.velocity.y = velocity.y * this.walking_speed;
+
+            if (velocity.x < -0.5) {
+                this.animation_state_machine.handle_input(this.commands.walk_left);
+            } else if (velocity.x > 0.5) {
+                this.animation_state_machine.handle_input(this.commands.walk_right);
+            } else if (velocity.y < -0.5) {
+                this.animation_state_machine.handle_input(this.commands.walk_up);
+            } else if (velocity.y > 0.5) {
+                this.animation_state_machine.handle_input(this.commands.walk_down);
+            }
         } else {
             if (this.path_step < this.path.length - 1) {
                 this.path_step += 1;

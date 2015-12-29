@@ -18,18 +18,13 @@ DungeonExplorer.PlayerHealth = function (game_state, prefab, properties) {
 DungeonExplorer.PlayerHealth.prototype = Object.create(DungeonExplorer.ReceiveDamage.prototype);
 DungeonExplorer.PlayerHealth.prototype.constructor = DungeonExplorer.PlayerHealth;
 
-DungeonExplorer.PlayerHealth.prototype.update = function () {
-    "use strict";
-    if (!this.invincible) {
-        DungeonExplorer.ReceiveDamage.prototype.update.call(this);
-    }
-};
-
 DungeonExplorer.PlayerHealth.prototype.damage = function (attacked, attack) {
     "use strict";
-    DungeonExplorer.ReceiveDamage.prototype.damage.call(this, attacked, attack);
-    this.damage_tween.start();
-    this.invincible = true;
+    if (!this.invincible) {
+        DungeonExplorer.ReceiveDamage.prototype.damage.call(this, attacked, attack);
+        this.damage_tween.start();
+        this.invincible = true;
+    }
 };
 
 DungeonExplorer.PlayerHealth.prototype.end_damage = function () {

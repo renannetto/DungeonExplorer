@@ -3,17 +3,38 @@ var DungeonExplorer = DungeonExplorer || {};
 
 DungeonExplorer.PlayerMovement = function (game_state, prefab, properties) {
     "use strict";
+    var walking_state_name, walking_state, standing_state_name, standing_state;
     Engine.Script.call(this, game_state, prefab, properties);
-
-    this.prefab.sprite.animations.add("walking_down", properties.walking_down_animation.frames, properties.walking_down_animation.fps, true);
-    this.prefab.sprite.animations.add("walking_left", properties.walking_left_animation.frames, properties.walking_left_animation.fps, true);
-    this.prefab.sprite.animations.add("walking_right", properties.walking_right_animation.frames, properties.walking_right_animation.fps, true);
-    this.prefab.sprite.animations.add("walking_up", properties.walking_up_animation.frames, properties.walking_up_animation.fps, true);
 
     this.prefab.sprite.body.setSize(24, 24, 0, 8);
     this.prefab.sprite.anchor.setTo(0.5, 0.75);
 
     this.movement = {left: false, right: false, up: false, down: false};
+
+    this.animation_state_machine = new Engine.StateMachine();
+
+    for (walking_state_name in this.walking_states) {
+        if (this.walking_states.hasOwnProperty(walking_state_name)) {
+            walking_state = new DungeonExplorer.WalkingState(walking_state_name, this.prefab, walking_state_name, this.walking_states[walking_state_name].frames, this.walking_states[walking_state_name].fps, true, this.walking_states[walking_state_name].standing_state);
+            this.animation_state_machine.add_state(walking_state_name, walking_state);
+        }
+    }
+
+    for (standing_state_name in this.standing_states) {
+        if (this.standing_states.hasOwnProperty(standing_state_name)) {
+            standing_state = new DungeonExplorer.StandingState(standing_state_name, this.prefab, this.standing_states[standing_state_name].frame);
+            this.animation_state_machine.add_state(standing_state_name, standing_state);
+        }
+    }
+
+    this.animation_state_machine.set_initial_state("standing_down");
+
+    this.commands = {};
+    this.commands.walk_left = new Engine.Command("walk", {direction: {x: -1, y: 0}});
+    this.commands.walk_right = new Engine.Command("walk", {direction: {x: 1, y: 0}});
+    this.commands.walk_up = new Engine.Command("walk", {direction: {x: 0, y: -1}});
+    this.commands.walk_down = new Engine.Command("walk", {direction: {x: 0, y: 1}});
+    this.commands.stop = new Engine.Command("stop", {});
 };
 
 DungeonExplorer.PlayerMovement.prototype = Object.create(Engine.Script.prototype);
@@ -26,12 +47,12 @@ DungeonExplorer.PlayerMovement.prototype.update = function () {
     if (this.movement.left && this.prefab.sprite.body.velocity.x <= 0) {
         this.prefab.sprite.body.velocity.x = -this.walking_speed;
         if (this.prefab.sprite.body.velocity.y === 0) {
-            this.prefab.sprite.animations.play("walking_left");
+            this.animation_state_machine.handle_input(this.commands.walk_left);
         }
     } else if (this.movement.right && this.prefab.sprite.body.velocity.x >= 0) {
         this.prefab.sprite.body.velocity.x = +this.walking_speed;
         if (this.prefab.sprite.body.velocity.y === 0) {
-            this.prefab.sprite.animations.play("walking_right");
+            this.animation_state_machine.handle_input(this.commands.walk_right);
         }
     } else {
         this.prefab.sprite.body.velocity.x = 0;
@@ -40,20 +61,19 @@ DungeonExplorer.PlayerMovement.prototype.update = function () {
     if (this.movement.up && this.prefab.sprite.body.velocity.y <= 0) {
         this.prefab.sprite.body.velocity.y = -this.walking_speed;
         if (this.prefab.sprite.body.velocity.x === 0) {
-            this.prefab.sprite.animations.play("walking_up");
+            this.animation_state_machine.handle_input(this.commands.walk_up);
         }
     } else if (this.movement.down && this.prefab.sprite.body.velocity.y >= 0) {
         this.prefab.sprite.body.velocity.y = +this.walking_speed;
         if (this.prefab.sprite.body.velocity.x === 0) {
-            this.prefab.sprite.animations.play("walking_down");
+            this.animation_state_machine.handle_input(this.commands.walk_down);
         }
     } else {
         this.prefab.sprite.body.velocity.y = 0;
     }
 
     if (this.prefab.sprite.body.velocity.x === 0 && this.prefab.sprite.body.velocity.y === 0) {
-        this.prefab.sprite.animations.stop();
-        this.prefab.sprite.frame = this.stopped_frames[this.prefab.sprite.body.facing];
+        this.animation_state_machine.handle_input(this.commands.stop);
     }
 };
 
