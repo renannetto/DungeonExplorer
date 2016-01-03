@@ -30,6 +30,9 @@ DungeonExplorer.DungeonState.prototype.create = function () {
     Engine.TiledState.prototype.create.call(this);
     
     this.game.camera.follow(this.prefabs.player.sprite);
+
+    this.dungeon = new DungeonExplorer.Dungeon(this);
+    this.dungeon.generate_dungeon(10);
 };
 
 DungeonExplorer.DungeonState.prototype.render = function () {
