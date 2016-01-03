@@ -31,6 +31,8 @@ DungeonExplorer.Dungeon.prototype.generate_dungeon = function (number_of_rooms) 
     }, this);
 
     this.print_grid();
+
+    return this.grid[(grid_size / 2) - 1][(grid_size / 2) - 1];
 };
 
 DungeonExplorer.Dungeon.prototype.print_grid = function () {

@@ -6,11 +6,12 @@ Engine.LoadingState = function () {
     Phaser.State.call(this);
 };
 
-Engine.prototype = Object.create(Phaser.State.prototype);
-Engine.prototype.constructor = Engine.LoadingState;
+Engine.LoadingState.prototype = Object.create(Phaser.State.prototype);
+Engine.LoadingState.prototype.constructor = Engine.LoadingState;
 
-Engine.LoadingState.prototype.init = function (level_data, extra_parameters) {
+Engine.LoadingState.prototype.init = function (next_state, level_data, extra_parameters) {
     "use strict";
+    this.next_state = next_state;
     this.level_data = level_data;
     this.extra_parameters = extra_parameters;
 };
@@ -34,5 +35,5 @@ Engine.LoadingState.prototype.preload = function () {
 
 Engine.LoadingState.prototype.create = function () {
     "use strict";
-    this.game.state.start("GameState", true, false, this.level_data, this.extra_parameters);
+    this.game.state.start(this.next_state, true, false, this.level_data, this.extra_parameters);
 };
