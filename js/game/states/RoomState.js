@@ -46,6 +46,11 @@ DungeonExplorer.RoomState.prototype.create = function () {
     Engine.TiledState.prototype.create.call(this);
 
     this.create_prefab("player", "player", {x: this.game.world.width / 2, y: this.game.world.height / 2}, {});
+
+    this.room.obstacles.forEach(function (obstacle) {
+        this.map.putTile(obstacle.tile, obstacle.position.x, obstacle.position.y, this.layers.collision);
+    }, this);
+    this.set_collision_to_layer(this.layers.collision.layer);
 };
 
 DungeonExplorer.RoomState.prototype.render = function () {

@@ -2,6 +2,9 @@ var DungeonExplorer = DungeonExplorer || {};
 
 DungeonExplorer.Dungeon = function (game_state) {
     "use strict";
+    this.OBSTACLE_TILES = [35, 37];
+    this.TILE_DIMENSIONS = new Phaser.Point(32, 32);
+
     this.game_state = game_state;
 };
 
@@ -16,7 +19,7 @@ DungeonExplorer.Dungeon.prototype.generate_dungeon = function (number_of_rooms) 
     created_rooms = [];
     while (open_rooms.length > 0 && created_rooms.length < number_of_rooms) {
         current_room_coordinate = open_rooms.shift();
-        current_room = new DungeonExplorer.Room(current_room_coordinate);
+        current_room = new DungeonExplorer.Room(this.game_state, current_room_coordinate);
         this.grid[current_room_coordinate.row][current_room_coordinate.column] = current_room;
         created_rooms.push(current_room);
         this.check_for_neighbors(current_room, open_rooms);
@@ -28,6 +31,7 @@ DungeonExplorer.Dungeon.prototype.generate_dungeon = function (number_of_rooms) 
                 room.connect(coordinate.direction, this.grid[coordinate.row][coordinate.column]);
             }
         }, this);
+        room.populate(this.OBSTACLE_TILES, this.TILE_DIMENSIONS);
     }, this);
 
     this.print_grid();
