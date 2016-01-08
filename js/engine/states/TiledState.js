@@ -54,8 +54,10 @@ Engine.TiledState.prototype.set_collision_to_layer = function (layer) {
 
 Engine.TiledState.prototype.create_object = function (object) {
     "use strict";
-    var prefab_position;
-    prefab_position = {"x": object.x + (this.map.tileHeight / 2), "y": object.y - (this.map.tileHeight / 2)};
+    var object_y, prefab_position;
+    object.x = object.x || 0;
+    object.y = object.y || 0;
+    object_y = (object.gid) ? object.y - (this.map.tileHeight / 2) : object.y + (object.height / 2);
+    prefab_position = {x: object.x + (this.map.tileHeight / 2), y: object_y};
     this.create_prefab(object.type, object.name, prefab_position, object.properties);
-
 };

@@ -36,7 +36,7 @@ DungeonExplorer.RoomState.prototype.preload = function () {
 
 DungeonExplorer.RoomState.prototype.create = function () {
     "use strict";
-    var tile_dimensions;
+    var tile_dimensions, enemy_index, enemy_name;
     this.map = this.game.add.tilemap(this.MAP_KEY);
     this.map.addTilesetImage(this.map.tilesets[0].name, this.MAP_TILESET);
 
@@ -51,6 +51,11 @@ DungeonExplorer.RoomState.prototype.create = function () {
         this.map.putTile(obstacle.tile, obstacle.position.x, obstacle.position.y, this.layers.collision);
     }, this);
     this.set_collision_to_layer(this.layers.collision.layer);
+
+    for (enemy_index = 0; enemy_index < this.room.enemies.length; enemy_index += 1) {
+        enemy_name = "enemy_" + enemy_index;
+        this.create_prefab(this.room.enemies[enemy_index].prefab, enemy_name, this.room.enemies[enemy_index].position, {});
+    }
 };
 
 DungeonExplorer.RoomState.prototype.render = function () {

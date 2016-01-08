@@ -25,6 +25,43 @@
          "width":15,
          "x":0,
          "y":0
+        },
+        {
+         "height":15,
+         "name":"objects",
+         "objects":[
+                {
+                 "height":32,
+                 "name":"door_W",
+                 "properties":
+                    {
+                     "enter_door.direction":"W"
+                    },
+                 "type":"door",
+                 "visible":true,
+                 "width":32,
+                 "x":0,
+                 "y":224
+                },
+                {
+                 "height":32,
+                 "name":"door_E",
+                 "properties":
+                    {
+                     "enter_door.direction":"E"
+                    },
+                 "type":"door",
+                 "visible":true,
+                 "width":32,
+                 "x":448,
+                 "y":224
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "width":15,
+         "x":0,
+         "y":0
         }],
  "orientation":"orthogonal",
  "properties":

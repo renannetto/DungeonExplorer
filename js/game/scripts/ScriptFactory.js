@@ -11,7 +11,8 @@ DungeonExplorer.ScriptFactory = function (game_state) {
         "receive_damage": DungeonExplorer.ReceiveDamage.prototype.constructor,
         "cause_damage": Engine.Script.prototype.constructor,
         "enemy_movement": DungeonExplorer.EnemyMovement.prototype.constructor,
-        "player_health": DungeonExplorer.PlayerHealth.prototype.constructor
+        "player_health": DungeonExplorer.PlayerHealth.prototype.constructor,
+        "enter_door": DungeonExplorer.EnterDoor.prototype.constructor
     };
 };
 

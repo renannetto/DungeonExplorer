@@ -1,0 +1,17 @@
+{
+    "sprite": {
+        "type": "sprite",
+        "texture": {"type": "asset_key", "asset_key": ""},
+        "group": "doors",
+        "body": {
+            "physics": "arcade",
+            "immovable": true,
+            "allowGravity": false
+        }
+    },
+    "scripts": {
+        "enter_door": {
+            "direction": ""
+        }
+    }
+}
