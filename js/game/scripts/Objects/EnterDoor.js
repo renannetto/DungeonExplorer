@@ -9,6 +9,13 @@ DungeonExplorer.EnterDoor = function (game_state, prefab, properties) {
     this.prefab.sprite.body.setSize(16, 16, 0, 0);
 
     this.open = false;
+
+    this.player_positions = {
+        S: {x: this.game_state.game.world.width / 2, y: 0},
+        W: {x: this.game_state.game.world.width, y: this.game_state.game.world.height / 2},
+        N: {x: this.game_state.game.world.width / 2, y: this.game_state.game.world.height},
+        E: {x: 0, y: this.game_state.game.world.height / 2}
+    };
 };
 
 DungeonExplorer.EnterDoor.prototype = Object.create(Engine.Script.prototype);
@@ -25,6 +32,7 @@ DungeonExplorer.EnterDoor.prototype.enter_door = function (door, player) {
     "use strict";
     var next_room;
     next_room = this.game_state.room.neighbors[this.direction];
+    this.game_state.player_position = this.player_positions[this.direction];
     this.game_state.game.state.start("BootState", true, false, "RoomState", "assets/levels/room_level.json", {room: next_room});
 };
 

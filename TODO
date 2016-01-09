@@ -1,4 +1,3 @@
-place player in correct position when changing room
 do not respawn enemies
 physics body and animations as components
 show player lives
@@ -7,3 +6,4 @@ generate obstacles in different patterns
 fix enemies pathfinding
 fix damage bouncing to respect physics
 improve enemies AI (behavior tree?)
+increase difficulty when clearing levels

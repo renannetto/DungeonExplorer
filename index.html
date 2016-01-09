@@ -83,8 +83,7 @@
             game.state.add("LoadingState", new Engine.LoadingState());
             game.state.add("DungeonState", new DungeonExplorer.DungeonState());
             game.state.add("RoomState", new DungeonExplorer.RoomState());
-//            game.state.start("BootState", true, false, "ExampleState", "assets/levels/example_level.json");
-            game.state.start("DungeonState", true, false, "assets/levels/room_level.json", 10);
+            game.state.start("DungeonState", true, false, 10);
         </script>
 	</body>
 </html>

@@ -19,5 +19,5 @@ DungeonExplorer.ReachExit.prototype.update = function () {
 
 DungeonExplorer.ReachExit.prototype.reach_exit = function () {
     "use strict";
-    this.game_state.game.state.start("DungeonState", true, false, "assets/levels/room_level.json", 10);
+    this.game_state.game.state.start("DungeonState", true, false, 10);
 };

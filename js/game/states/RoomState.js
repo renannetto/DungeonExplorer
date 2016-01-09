@@ -25,6 +25,8 @@ DungeonExplorer.RoomState.prototype.init = function (level_data, extra_parameter
     this.user_input = this.game.plugins.add(Engine.UserInput, this, JSON.parse(this.game.cache.getText("user_input")));
 
     this.room = extra_parameters.room;
+
+    this.player_position = this.player_position || new Phaser.Point(this.game.world.width / 2, this.game.world.height / 2);
 };
 
 DungeonExplorer.RoomState.prototype.preload = function () {
@@ -45,7 +47,7 @@ DungeonExplorer.RoomState.prototype.create = function () {
 
     Engine.TiledState.prototype.create.call(this);
 
-    this.create_prefab("player", "player", {x: this.game.world.width / 2, y: this.game.world.height / 2}, {});
+    this.create_prefab("player", "player", this.player_position, {});
 
     this.room.obstacles.forEach(function (obstacle) {
         this.map.putTile(obstacle.tile, obstacle.position.x, obstacle.position.y, this.layers.collision);
