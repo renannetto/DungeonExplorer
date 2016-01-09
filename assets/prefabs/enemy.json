@@ -15,7 +15,7 @@
     "scripts": {
         "receive_damage": {
             "attack_group": "attacks",
-            "health": 10,
+            "health": 1,
             "bouncing": 25
         },
         "cause_damage": {

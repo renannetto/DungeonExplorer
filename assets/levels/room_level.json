@@ -2,15 +2,21 @@
     "assets": {
         "player_spritesheet": { "type": "spritesheet", "source": "assets/images/characters_spritesheet.png", "frame_width": 32, "frame_height": 64 },
         "bluefire_spritesheet": { "type": "spritesheet", "source": "assets/images/bluefire.png", "frame_width": 32, "frame_height": 32 },
+        "exit_image": { "type": "image", "source": "assets/images/portal.png" },
+
         "dungeon_tileset": { "type": "image", "source": "assets/images/dungeon_tileset.png" },
         "dungeon_tilemap": { "type": "tilemap", "source": "assets/maps/example_map.json" },
+
         "player": { "type": "prefab", "source": "assets/prefabs/player.json" },
         "enemy": { "type": "prefab", "source": "assets/prefabs/enemy.json" },
         "attack": { "type": "prefab", "source": "assets/prefabs/attack.json" },
-        "door": { "type": "prefab", "source": "assets/prefabs/door.json" }
+        "door": { "type": "prefab", "source": "assets/prefabs/door.json" },
+        "exit": { "type": "prefab", "source": "assets/prefabs/exit.json" },
+        "text_stat": { "type": "prefab", "source": "assets/prefabs/text_stat.json" }
     },
     "groups": [
         "doors",
+        "exits",
         "enemies",
         "attacks",
         "players"

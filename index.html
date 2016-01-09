@@ -57,6 +57,10 @@
         <script src="js/game/scripts/Enemy/EnemyMovement.js"></script>
         
         <script src="js/game/scripts/Objects/EnterDoor.js"></script>
+        <script src="js/game/scripts/Objects/ReachExit.js"></script>
+
+        <script src="js/game/scripts/HUD/ShowStat.js"></script>
+        <script src="js/game/scripts/HUD/ShowStatWithSprite.js"></script>
 
 
 		<style>
@@ -80,7 +84,7 @@
             game.state.add("DungeonState", new DungeonExplorer.DungeonState());
             game.state.add("RoomState", new DungeonExplorer.RoomState());
 //            game.state.start("BootState", true, false, "ExampleState", "assets/levels/example_level.json");
-            game.state.start("DungeonState", true, false, "assets/levels/example_level.json", 10);
+            game.state.start("DungeonState", true, false, "assets/levels/room_level.json", 10);
         </script>
 	</body>
 </html>

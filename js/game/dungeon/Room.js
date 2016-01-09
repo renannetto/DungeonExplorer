@@ -14,7 +14,7 @@ DungeonExplorer.Room = function (game_state, coordinate) {
     this.population = [];
     this.neighbors = {};
     this.obstacles = [];
-    this.enemies = [];
+    this.prefabs = [];
 };
 
 DungeonExplorer.Room.prototype.neighbor_coordinates = function () {
@@ -81,8 +81,16 @@ DungeonExplorer.Room.prototype.populate_enemies = function (enemy_prefabs, tile_
         enemy_prefab_index = this.game_state.game.rnd.between(0, enemy_prefabs.length - 1);
         enemy_tile = this.find_free_tile(tile_dimensions);
         enemy_position = new Phaser.Point(enemy_tile.x * tile_dimensions.x, enemy_tile.y * tile_dimensions.y);
-        this.enemies.push({prefab: enemy_prefabs[enemy_prefab_index], position: enemy_position});
+        this.prefabs.push({name: "enemy" + enemy_index, prefab: enemy_prefabs[enemy_prefab_index], position: enemy_position});
     }
+};
+
+DungeonExplorer.Room.prototype.add_exit = function (exit_prefab, tile_dimensions) {
+    "use strict";
+    var tile, position;
+    tile = this.find_free_tile(tile_dimensions);
+    position = new Phaser.Point(tile.x * tile_dimensions.x, tile.y * tile_dimensions.y);
+    this.prefabs.push({name: "exit", prefab: exit_prefab, position: position});
 };
 
 DungeonExplorer.Room.prototype.find_free_tile = function (tile_dimensions) {

@@ -36,7 +36,7 @@ DungeonExplorer.RoomState.prototype.preload = function () {
 
 DungeonExplorer.RoomState.prototype.create = function () {
     "use strict";
-    var tile_dimensions, enemy_index, enemy_name;
+    var tile_dimensions, prefab_index;
     this.map = this.game.add.tilemap(this.MAP_KEY);
     this.map.addTilesetImage(this.map.tilesets[0].name, this.MAP_TILESET);
 
@@ -52,10 +52,15 @@ DungeonExplorer.RoomState.prototype.create = function () {
     }, this);
     this.set_collision_to_layer(this.layers.collision.layer);
 
-    for (enemy_index = 0; enemy_index < this.room.enemies.length; enemy_index += 1) {
-        enemy_name = "enemy_" + enemy_index;
-        this.create_prefab(this.room.enemies[enemy_index].prefab, enemy_name, this.room.enemies[enemy_index].position, {});
+    for (prefab_index = 0; prefab_index < this.room.prefabs.length; prefab_index += 1) {
+        this.create_prefab(this.room.prefabs[prefab_index].prefab, this.room.prefabs[prefab_index].name, this.room.prefabs[prefab_index].position, {});
     }
+
+    this.groups.doors.forEach(function (door_sprite) {
+        var door_prefab;
+        door_prefab = this.prefabs[door_sprite.name];
+        door_prefab.scripts.enter_door.listen_to_enemies(this.groups.enemies);
+    }, this);
 };
 
 DungeonExplorer.RoomState.prototype.render = function () {

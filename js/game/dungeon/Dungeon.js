@@ -1,9 +1,11 @@
+var Phaser = Phaser || {};
 var DungeonExplorer = DungeonExplorer || {};
 
 DungeonExplorer.Dungeon = function (game_state) {
     "use strict";
     this.OBSTACLE_TILES = [35, 37];
     this.ENEMY_PREFABS = ["enemy"];
+    this.EXIT_PREFAB = "exit";
     this.TILE_DIMENSIONS = new Phaser.Point(32, 32);
 
     this.game_state = game_state;
@@ -11,12 +13,14 @@ DungeonExplorer.Dungeon = function (game_state) {
 
 DungeonExplorer.Dungeon.prototype.generate_dungeon = function (number_of_rooms) {
     "use strict";
-    var grid_size, open_rooms, current_room_coordinate, current_room, created_rooms;
+    var grid_size, open_rooms, current_room_coordinate, current_room, created_rooms, initial_room_coordinate, final_room_coordinate, max_distance_to_initial_room, distance_to_initial_room;
     grid_size = 2 * number_of_rooms;
     this.initialize_grid(grid_size);
 
+    initial_room_coordinate = new Phaser.Point((grid_size / 2) - 1, (grid_size / 2) - 1);
+    final_room_coordinate = new Phaser.Point(initial_room_coordinate.x, initial_room_coordinate.y);
     open_rooms = [];
-    open_rooms.push({row: (grid_size / 2) - 1, column: (grid_size / 2) - 1});
+    open_rooms.push({row: initial_room_coordinate.y, column: initial_room_coordinate.x});
     created_rooms = [];
     while (open_rooms.length > 0 && created_rooms.length < number_of_rooms) {
         current_room_coordinate = open_rooms.shift();
@@ -26,6 +30,7 @@ DungeonExplorer.Dungeon.prototype.generate_dungeon = function (number_of_rooms) 
         this.check_for_neighbors(current_room, open_rooms);
     }
 
+    max_distance_to_initial_room = 0;
     created_rooms.forEach(function (room) {
         room.neighbor_coordinates().forEach(function (coordinate) {
             if (this.grid[coordinate.row][coordinate.column]) {
@@ -33,11 +38,18 @@ DungeonExplorer.Dungeon.prototype.generate_dungeon = function (number_of_rooms) 
             }
         }, this);
         room.populate(this.OBSTACLE_TILES, this.ENEMY_PREFABS, this.TILE_DIMENSIONS);
+        distance_to_initial_room = Math.abs(room.coordinate.column - initial_room_coordinate.x) + Math.abs(room.coordinate.row - initial_room_coordinate.y);
+        if (distance_to_initial_room > max_distance_to_initial_room) {
+            final_room_coordinate.x = room.coordinate.column;
+            final_room_coordinate.y = room.coordinate.row;
+        }
     }, this);
+
+    this.grid[final_room_coordinate.y][final_room_coordinate.x].add_exit(this.EXIT_PREFAB, this.TILE_DIMENSIONS);
 
     this.print_grid();
 
-    return this.grid[(grid_size / 2) - 1][(grid_size / 2) - 1];
+    return this.grid[initial_room_coordinate.y][initial_room_coordinate.x];
 };
 
 DungeonExplorer.Dungeon.prototype.print_grid = function () {

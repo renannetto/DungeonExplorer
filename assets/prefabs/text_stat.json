@@ -1,0 +1,19 @@
+{
+    "sprite": {
+        "type": "text",
+        "text": "",
+        "style": {
+            "font": "14px Arial",
+            "fill": "#FFFFFF"
+        },
+        "group": "hud"
+    },
+    "scripts": {
+        "show_stat_with_text": {
+            "prefab_to_show": "player",
+            "script_to_show": "player_health",
+            "property_to_show": "health",
+            "label": "Lives"
+        }
+    }
+}

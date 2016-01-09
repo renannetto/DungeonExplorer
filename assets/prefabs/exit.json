@@ -1,0 +1,17 @@
+{
+    "sprite": {
+        "type": "sprite",
+        "texture": {"type": "asset_key", "asset_key": "exit_image"},
+        "group": "exits",
+        "body": {
+            "physics": "arcade",
+            "immovable": true,
+            "allowGravity": false
+        }
+    },
+    "scripts": {
+        "reach_exit": {
+
+        }
+    }
+}
