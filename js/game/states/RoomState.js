@@ -27,6 +27,8 @@ DungeonExplorer.RoomState.prototype.init = function (level_data, extra_parameter
     this.room = extra_parameters.room;
 
     this.player_position = this.player_position || new Phaser.Point(this.game.world.width / 2, this.game.world.height / 2);
+
+    this.cleared_rooms = this.cleared_rooms || [];
 };
 
 DungeonExplorer.RoomState.prototype.preload = function () {
@@ -54,14 +56,21 @@ DungeonExplorer.RoomState.prototype.create = function () {
     }, this);
     this.set_collision_to_layer(this.layers.collision.layer);
 
-    for (prefab_index = 0; prefab_index < this.room.prefabs.length; prefab_index += 1) {
-        this.create_prefab(this.room.prefabs[prefab_index].prefab, this.room.prefabs[prefab_index].name, this.room.prefabs[prefab_index].position, {});
+    if (this.cleared_rooms.indexOf(this.room.template_name()) === -1) {
+        for (prefab_index = 0; prefab_index < this.room.prefabs.length; prefab_index += 1) {
+            this.create_prefab(this.room.prefabs[prefab_index].prefab, this.room.prefabs[prefab_index].name, this.room.prefabs[prefab_index].position, {});
+        }
     }
 
     this.groups.doors.forEach(function (door_sprite) {
         var door_prefab;
         door_prefab = this.prefabs[door_sprite.name];
         door_prefab.scripts.enter_door.listen_to_enemies(this.groups.enemies);
+    }, this);
+    this.groups.exits.forEach(function (exit_sprite) {
+        var exit_prefab;
+        exit_prefab = this.prefabs[exit_sprite.name];
+        exit_prefab.scripts.reach_exit.listen_to_enemies(this.groups.enemies);
     }, this);
 };
 

@@ -6,6 +6,8 @@ DungeonExplorer.AttackMovement = function (game_state, prefab, properties) {
     Engine.PrefabMovement.call(this, game_state, prefab, properties);
 
     this.game_state.game.physics.arcade.enable(this.prefab.sprite);
+    this.prefab.sprite.body.setSize(8, 8, 0, 0);
+
     this.prefab.sprite.checkWorldBounds = true;
     this.prefab.sprite.outOfBoundsKill = true;
 

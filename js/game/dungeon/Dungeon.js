@@ -45,7 +45,7 @@ DungeonExplorer.Dungeon.prototype.generate_dungeon = function (number_of_rooms) 
         }
     }, this);
 
-    this.grid[final_room_coordinate.y][final_room_coordinate.x].add_exit(this.EXIT_PREFAB, this.TILE_DIMENSIONS);
+    this.grid[initial_room_coordinate.y][initial_room_coordinate.x].add_exit(this.EXIT_PREFAB, this.TILE_DIMENSIONS);
 
     this.print_grid();
 
