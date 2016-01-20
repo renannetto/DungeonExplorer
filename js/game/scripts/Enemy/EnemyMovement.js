@@ -50,6 +50,7 @@ DungeonExplorer.EnemyMovement.prototype.update = function () {
     "use strict";
     var next_position, next_position_coord, current_coord, velocity;
     this.game_state.game.physics.arcade.collide(this.prefab.sprite, this.game_state.layers.collision);
+    this.game_state.game.physics.arcade.collide(this.prefab.sprite, this.game_state.groups.doors);
 
     if (this.path.length > 0) {
         next_position = this.path[this.path_step];

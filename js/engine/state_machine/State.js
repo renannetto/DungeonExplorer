@@ -15,5 +15,5 @@ Engine.State.prototype.exit = function () {
 
 Engine.State.prototype.handle_input = function (command) {
     "use strict";
-    return null;
+    return this.name;
 };

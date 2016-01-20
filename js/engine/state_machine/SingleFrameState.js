@@ -17,5 +17,5 @@ Engine.SingleFrameState.prototype.enter = function () {
 
 Engine.SingleFrameState.prototype.handle_input = function (command) {
     "use strict";
-    return null;
+    return this.name;
 };

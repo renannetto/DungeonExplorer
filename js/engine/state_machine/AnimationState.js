@@ -21,5 +21,5 @@ Engine.AnimationState.prototype.exit = function () {
 
 Engine.AnimationState.prototype.handle_input = function (command) {
     "use strict";
-    return null;
+    return this.name;
 };

@@ -1,7 +1,6 @@
 physics body and animations as components
-show player lives
+show HUD
 populate rooms with items
-generate obstacles in different patterns
 fix enemies pathfinding
 fix damage bouncing to respect physics
 improve enemies AI (behavior tree?)

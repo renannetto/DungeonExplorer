@@ -24,7 +24,7 @@ DungeonExplorer.Dungeon.prototype.generate_dungeon = function (number_of_rooms) 
     created_rooms = [];
     while (open_rooms.length > 0 && created_rooms.length < number_of_rooms) {
         current_room_coordinate = open_rooms.shift();
-        current_room = new DungeonExplorer.Room(this.game_state, current_room_coordinate);
+        current_room = new DungeonExplorer.Room(this.game_state, current_room_coordinate, this.TILE_DIMENSIONS);
         this.grid[current_room_coordinate.row][current_room_coordinate.column] = current_room;
         created_rooms.push(current_room);
         this.check_for_neighbors(current_room, open_rooms);
@@ -37,7 +37,7 @@ DungeonExplorer.Dungeon.prototype.generate_dungeon = function (number_of_rooms) 
                 room.connect(coordinate.direction, this.grid[coordinate.row][coordinate.column]);
             }
         }, this);
-        room.populate(this.OBSTACLE_TILES, this.ENEMY_PREFABS, this.TILE_DIMENSIONS);
+        room.populate(this.OBSTACLE_TILES, this.ENEMY_PREFABS);
         distance_to_initial_room = Math.abs(room.coordinate.column - initial_room_coordinate.x) + Math.abs(room.coordinate.row - initial_room_coordinate.y);
         if (distance_to_initial_room > max_distance_to_initial_room) {
             final_room_coordinate.x = room.coordinate.column;
@@ -45,7 +45,7 @@ DungeonExplorer.Dungeon.prototype.generate_dungeon = function (number_of_rooms) 
         }
     }, this);
 
-    this.grid[initial_room_coordinate.y][initial_room_coordinate.x].add_exit(this.EXIT_PREFAB, this.TILE_DIMENSIONS);
+    this.grid[final_room_coordinate.y][final_room_coordinate.x].populate_prefabs(1, [this.EXIT_PREFAB]);
 
     this.print_grid();
 
