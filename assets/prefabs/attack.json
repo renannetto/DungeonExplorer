@@ -2,17 +2,22 @@
     "sprite": {
         "type": "sprite",
         "texture": {"type": "asset_key", "asset_key": "bluefire_spritesheet"},
-        "group": "attacks",
-        "body": {
-            "physics": "arcade"
+        "group": "attacks"
+    },
+    "components": {
+        "arcade_body": {
+            "collisions": [
+                {"type": "collide", "target_type": "layers", "target": "collision", "context": "attack_movement", "callback": "hit_wall"}
+            ]
+        },
+        "animator": {
+            "animations": [
+                {"name": "moving", "frames": [0, 1, 2], "fps": 10, "loop": true}
+            ]
         }
     },
     "scripts": {
         "attack_movement": {
-            "moving_animation": {
-                "frames": [0, 1, 2],
-                "fps": 10
-            },
             "speed": 300
         },
         "cause_damage": {

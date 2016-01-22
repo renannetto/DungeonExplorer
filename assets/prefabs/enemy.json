@@ -3,13 +3,27 @@
         "type": "sprite",
         "texture": {"type": "asset_key", "asset_key": "player_spritesheet"},
         "group": "enemies",
-        "body": {
-            "physics": "arcade",
-            "allowGravity": false,
-            "mass": 5
-        },
         "properties": {
             "frame": 10
+        }
+    },
+    "components": {
+        "arcade_body": {
+            "mass": 5,
+            "size": {"width": 24, "height": 24, "offset_x": 0, "offset_y": 8},
+            "collisions": [
+                {"type": "collide", "target_type": "layers", "target": "collision"},
+                {"type": "collide", "target_type": "groups", "target": "doors"},
+                {"type": "collide", "target_type": "groups", "target": "attacks", "context": "receive_damage", "callback": "damage"}
+            ]
+        },
+        "animator": {
+            "animations": [
+                {"name": "walking_left", "frames": [21, 22, 23], "fps": 6, "loop": true},
+                {"name": "walking_right", "frames": [33, 34, 35], "fps": 6, "loop": true},
+                {"name": "walking_up", "frames": [45, 46, 47], "fps": 6, "loop": true},
+                {"name": "walking_down", "frames": [9, 10, 11], "fps": 6, "loop": true}
+            ]
         }
     },
     "scripts": {
@@ -29,23 +43,19 @@
             "current_direction_index": 0,
             "walking_states": {
                 "walk_left": {
-                    "frames": [21, 22, 23],
-                    "fps": 6,
+                    "animation_name": "walking_left",
                     "standing_state": "standing_left"
                 },
                 "walk_right": {
-                    "frames": [33, 34, 35],
-                    "fps": 6,
+                    "animation_name": "walking_right",
                     "standing_state": "standing_right"
                 },
                 "walk_up": {
-                    "frames": [45, 46, 47],
-                    "fps": 6,
+                    "animation_name": "walking_up",
                     "standing_state": "standing_up"
                 },
                 "walk_down": {
-                    "frames": [9, 10, 11],
-                    "fps": 6,
+                    "animation_name": "walking_down",
                     "standing_state": "standing_down"
                 }
             },

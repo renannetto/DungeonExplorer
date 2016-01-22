@@ -1,9 +1,9 @@
 var Engine = Engine || {};
 var DungeonExplorer = DungeonExplorer || {};
 
-DungeonExplorer.WalkingState = function (name, prefab, animation_name, animation_frames, animation_fps, loop, standing_state) {
+DungeonExplorer.WalkingState = function (name, prefab, animation_name, standing_state) {
     "use strict";
-    Engine.AnimationState.call(this, name, prefab, animation_name, animation_frames, animation_fps, loop);
+    Engine.AnimationState.call(this, name, prefab, animation_name);
     this.prefab = prefab;
     this.standing_state = standing_state;
 };

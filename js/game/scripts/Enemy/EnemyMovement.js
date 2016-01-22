@@ -21,7 +21,7 @@ DungeonExplorer.EnemyMovement = function (game_state, prefab, properties) {
 
     for (walking_state_name in this.walking_states) {
         if (this.walking_states.hasOwnProperty(walking_state_name)) {
-            walking_state = new DungeonExplorer.WalkingState(walking_state_name, this.prefab, walking_state_name, this.walking_states[walking_state_name].frames, this.walking_states[walking_state_name].fps, true, this.walking_states[walking_state_name].standing_state);
+            walking_state = new DungeonExplorer.WalkingState(walking_state_name, this.prefab, this.walking_states[walking_state_name].animation_name, this.walking_states[walking_state_name].standing_state);
             this.animation_state_machine.add_state(walking_state_name, walking_state);
         }
     }
@@ -49,8 +49,6 @@ DungeonExplorer.EnemyMovement.prototype.constructor = DungeonExplorer.EnemyMovem
 DungeonExplorer.EnemyMovement.prototype.update = function () {
     "use strict";
     var next_position, next_position_coord, current_coord, velocity;
-    this.game_state.game.physics.arcade.collide(this.prefab.sprite, this.game_state.layers.collision);
-    this.game_state.game.physics.arcade.collide(this.prefab.sprite, this.game_state.groups.doors);
 
     if (this.path.length > 0) {
         next_position = this.path[this.path_step];

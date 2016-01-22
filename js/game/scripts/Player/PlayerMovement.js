@@ -15,7 +15,7 @@ DungeonExplorer.PlayerMovement = function (game_state, prefab, properties) {
 
     for (walking_state_name in this.walking_states) {
         if (this.walking_states.hasOwnProperty(walking_state_name)) {
-            walking_state = new DungeonExplorer.WalkingState(walking_state_name, this.prefab, walking_state_name, this.walking_states[walking_state_name].frames, this.walking_states[walking_state_name].fps, true, this.walking_states[walking_state_name].standing_state);
+            walking_state = new DungeonExplorer.WalkingState(walking_state_name, this.prefab, this.walking_states[walking_state_name].animation_name, this.walking_states[walking_state_name].standing_state);
             this.animation_state_machine.add_state(walking_state_name, walking_state);
         }
     }
@@ -42,8 +42,6 @@ DungeonExplorer.PlayerMovement.prototype.constructor = DungeonExplorer.PlayerMov
 
 DungeonExplorer.PlayerMovement.prototype.update = function () {
     "use strict";
-    this.game_state.game.physics.arcade.collide(this.prefab.sprite, this.game_state.layers.collision);
-
     if (this.movement.left && this.prefab.sprite.body.velocity.x <= 0) {
         this.prefab.sprite.body.velocity.x = -this.walking_speed;
         if (this.prefab.sprite.body.velocity.y === 0) {

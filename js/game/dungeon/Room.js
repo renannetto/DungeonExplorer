@@ -1,19 +1,21 @@
 var Phaser = Phaser || {};
 var DungeonExplorer = DungeonExplorer || {};
 
-DungeonExplorer.Room = function (game_state, coordinate) {
+DungeonExplorer.Room = function (game_state, coordinate, tile_dimensions) {
     "use strict";
-    this.MIN_OBSTACLES = 5;
-    this.MAX_OBSTACLES = 10;
-    this.MIN_ENEMIES = 1;
-    this.MAX_ENEMIES = 3;
+    this.NUMBER_OF_OBSTACLES = {min: 3, max: 5};
+    this.NUMBER_OF_ENEMIES = {min: 1, max: 3};
+    this.OBSTACLE_SIZES = [{x: 1, y: 1}, {x: 1, y: 2}, {x: 1, y: 3},
+                           {x: 2, y: 1}, {x: 3, y: 1}];
+    this.OBSTACLE_LAYER = "collision";
 
     this.game_state = game_state;
     this.coordinate = coordinate;
+    this.tile_dimensions = tile_dimensions;
 
     this.population = [];
     this.neighbors = {};
-    this.obstacles = [];
+    this.tiles = [];
     this.prefabs = [];
 };
 
@@ -47,60 +49,74 @@ DungeonExplorer.Room.prototype.template_name = function () {
     return template_name;
 };
 
-DungeonExplorer.Room.prototype.populate = function (obstacle_tiles, enemies_data, tile_dimensions) {
+DungeonExplorer.Room.prototype.populate = function (obstacle_tiles, enemies_data) {
     "use strict";
-    var number_of_rows, number_of_columns, row_index, column_index;
-    number_of_rows = this.game_state.game.world.height / tile_dimensions.y;
-    number_of_columns = this.game_state.game.world.width / tile_dimensions.x;
+    var number_of_rows, number_of_columns, row_index, column_index, number_of_obstacles, number_of_enemies;
+    number_of_rows = this.game_state.game.world.height / this.tile_dimensions.y;
+    number_of_columns = this.game_state.game.world.width / this.tile_dimensions.x;
     for (row_index = 0; row_index <= number_of_rows; row_index += 1) {
         this.population.push([]);
         for (column_index = 0; column_index <= number_of_columns; column_index += 1) {
             this.population[row_index][column_index] = null;
         }
     }
-    this.populate_obstacles(obstacle_tiles, tile_dimensions);
-    this.populate_enemies(enemies_data, tile_dimensions);
+    number_of_obstacles = this.game_state.game.rnd.between(this.NUMBER_OF_OBSTACLES.min, this.NUMBER_OF_OBSTACLES.max);
+    this.populate_tiles(number_of_obstacles, this.OBSTACLE_LAYER, obstacle_tiles, this.OBSTACLE_SIZES);
+    number_of_enemies = this.game_state.game.rnd.between(this.NUMBER_OF_ENEMIES.min, this.NUMBER_OF_ENEMIES.max);
+    this.populate_prefabs(number_of_enemies, enemies_data);
 };
 
-DungeonExplorer.Room.prototype.populate_obstacles = function (obstacle_tiles, tile_dimensions) {
+DungeonExplorer.Room.prototype.populate_tiles = function (number_of_tiles, layer, possible_tiles, possible_sizes) {
     "use strict";
-    var number_of_obstacles, obstacle_index, tile_index, obstacle_position;
-    number_of_obstacles = this.game_state.game.rnd.between(this.MIN_OBSTACLES, this.MAX_OBSTACLES);
-    for (obstacle_index = 0; obstacle_index < number_of_obstacles; obstacle_index += 1) {
-        tile_index = this.game_state.game.rnd.between(0, obstacle_tiles.length - 1);
-        obstacle_position = this.find_free_tile(tile_dimensions);
-        this.obstacles.push({tile: obstacle_tiles[tile_index], position: obstacle_position});
+    var index, tile, region_size, region, coordinate_index;
+    for (index = 0; index < number_of_tiles; index += 1) {
+        tile = this.game_state.game.rnd.pick(possible_tiles);
+        region_size = this.game_state.game.rnd.pick(possible_sizes);
+        region = this.find_free_region(region_size);
+        for (coordinate_index = 0; coordinate_index < region.length; coordinate_index += 1) {
+            this.tiles.push({layer: layer, tile: tile, position: region[coordinate_index]});
+        }
     }
 };
 
-DungeonExplorer.Room.prototype.populate_enemies = function (enemy_prefabs, tile_dimensions) {
+DungeonExplorer.Room.prototype.populate_prefabs = function (number_of_prefabs, possible_prefabs) {
     "use strict";
-    var number_of_enemies, enemy_index, enemy_prefab_index, enemy_tile, enemy_position;
-    number_of_enemies = this.game_state.game.rnd.between(this.MIN_ENEMIES, this.MAX_ENEMIES);
-    for (enemy_index = 0; enemy_index < number_of_enemies; enemy_index += 1) {
-        enemy_prefab_index = this.game_state.game.rnd.between(0, enemy_prefabs.length - 1);
-        enemy_tile = this.find_free_tile(tile_dimensions);
-        enemy_position = new Phaser.Point(enemy_tile.x * tile_dimensions.x, enemy_tile.y * tile_dimensions.y);
-        this.prefabs.push({name: "enemy" + enemy_index, prefab: enemy_prefabs[enemy_prefab_index], position: enemy_position});
+    var index, prefab, tile_position, position;
+    for (index = 0; index < number_of_prefabs; index += 1) {
+        prefab = this.game_state.game.rnd.pick(possible_prefabs);
+        tile_position = this.find_free_region({x: 1, y: 1});
+        position = new Phaser.Point((tile_position[0].x * this.tile_dimensions.x) + (this.tile_dimensions.x / 2),
+                                (tile_position[0].y * this.tile_dimensions.y) + (this.tile_dimensions.y / 2));
+        this.prefabs.push({name: prefab + index, prefab: prefab, position: position});
     }
 };
 
-DungeonExplorer.Room.prototype.add_exit = function (exit_prefab, tile_dimensions) {
+DungeonExplorer.Room.prototype.find_free_region = function (size_in_tiles) {
     "use strict";
-    var tile, position;
-    tile = this.find_free_tile(tile_dimensions);
-    position = new Phaser.Point(tile.x * tile_dimensions.x, tile.y * tile_dimensions.y);
-    this.prefabs.push({name: "exit", prefab: exit_prefab, position: position});
+    var center_tile, region, x_coordinate, y_coordinate, initial_x_coordinate, initial_y_coordinate;
+    do {
+        center_tile = new Phaser.Point(this.game_state.game.rnd.between(2, (this.game_state.game.world.width / this.tile_dimensions.x) - 3),
+                                    this.game_state.game.rnd.between(2, (this.game_state.game.world.height / this.tile_dimensions.y) - 3));
+        region = [center_tile];
+        initial_x_coordinate = center_tile.x - Math.floor(size_in_tiles.x / 2);
+        initial_y_coordinate = center_tile.y - Math.floor(size_in_tiles.y / 2);
+        for (x_coordinate = initial_x_coordinate; x_coordinate < initial_x_coordinate + size_in_tiles.x; x_coordinate += 1) {
+            for (y_coordinate = initial_y_coordinate; y_coordinate < initial_y_coordinate + size_in_tiles.y; y_coordinate += 1) {
+                region.push(new Phaser.Point(x_coordinate, y_coordinate));
+            }
+        }
+    } while (!this.is_free(region));
+    return region;
 };
 
-DungeonExplorer.Room.prototype.find_free_tile = function (tile_dimensions) {
+DungeonExplorer.Room.prototype.is_free = function (region) {
     "use strict";
-    var position;
-    position = new Phaser.Point(this.game_state.game.rnd.between(2, (this.game_state.game.world.width / tile_dimensions.x) - 3),
-                                this.game_state.game.rnd.between(2, (this.game_state.game.world.height / tile_dimensions.y) - 3));
-    while (this.population[position.y][position.x]) {
-        position = new Phaser.Point(this.game_state.game.rnd.between(2, (this.game_state.game.world.width / tile_dimensions.x) - 3),
-                                    this.game_state.game.rnd.between(2, (this.game_state.game.world.height / tile_dimensions.y) - 3));
+    var coordinate_index, coordinate;
+    for (coordinate_index = 0; coordinate_index < region.length; coordinate_index += 1) {
+        coordinate = region[coordinate_index];
+        if (this.population[coordinate.y][coordinate.x]) {
+            return false;
+        }
     }
-    return position;
+    return true;
 };

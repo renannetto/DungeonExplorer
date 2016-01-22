@@ -18,11 +18,6 @@ DungeonExplorer.ReceiveDamage.prototype.reset = function () {
     this.health = this.initial_health;
 };
 
-DungeonExplorer.ReceiveDamage.prototype.update = function () {
-    "use strict";
-    this.game_state.game.physics.arcade.collide(this.prefab.sprite, this.game_state.groups[this.attack_group], this.damage, null, this);
-};
-
 DungeonExplorer.ReceiveDamage.prototype.damage = function (attacked, attack) {
     "use strict";
     var attacked_prefab, attack_prefab, damage;

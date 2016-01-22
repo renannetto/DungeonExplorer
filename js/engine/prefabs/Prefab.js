@@ -7,6 +7,7 @@ Engine.Prefab = function (game_state, name, sprite) {
     this.sprite = sprite;
     this.sprite.name = name;
     this.scripts = {};
+    this.components = {};
     
     this.game_state.prefabs[name] = this;
     
@@ -15,9 +16,15 @@ Engine.Prefab = function (game_state, name, sprite) {
 
 Engine.Prefab.prototype.update = function () {
     "use strict";
-    var script_name;
+    var component_name, script_name;
     this.sprite.update();
     
+    for (component_name in this.components) {
+        if (this.components.hasOwnProperty(component_name)) {
+            this.components[component_name].update();
+        }
+    }
+
     for (script_name in this.scripts) {
         if (this.scripts.hasOwnProperty(script_name)) {
             this.scripts[script_name].update();

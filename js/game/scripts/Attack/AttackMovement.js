@@ -11,7 +11,6 @@ DungeonExplorer.AttackMovement = function (game_state, prefab, properties) {
     this.prefab.sprite.checkWorldBounds = true;
     this.prefab.sprite.outOfBoundsKill = true;
 
-    this.prefab.sprite.animations.add("moving", properties.moving_animation.frames, properties.moving_animation.fps, true);
     this.prefab.sprite.animations.play("moving");
 };
 
@@ -20,8 +19,6 @@ DungeonExplorer.AttackMovement.prototype.constructor = DungeonExplorer.AttackMov
 
 DungeonExplorer.AttackMovement.prototype.update = function () {
     "use strict";
-    this.game_state.game.physics.arcade.collide(this.prefab.sprite, this.game_state.layers.collision, this.prefab.kill, null, this.prefab);
-
     this.move(this.prefab.sprite.body.facing, this.speed);
 
     this.prefab.sprite.scale.setTo(1, 1);
@@ -43,4 +40,9 @@ DungeonExplorer.AttackMovement.prototype.update = function () {
         this.prefab.sprite.angle = 90;
         break;
     }
+};
+
+DungeonExplorer.AttackMovement.prototype.hit_wall = function () {
+    "use strict";
+    this.prefab.kill();
 };

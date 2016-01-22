@@ -2,11 +2,15 @@
     "sprite": {
         "type": "sprite",
         "texture": {"type": "asset_key", "asset_key": ""},
-        "group": "doors",
-        "body": {
-            "physics": "arcade",
+        "group": "doors"
+    },
+    "components": {
+        "arcade_body": {
             "immovable": true,
-            "allowGravity": false
+            "size": {"width": 16, "height": 16, "offset_x": 0, "offset_y": 0},
+            "collisions": [
+                {"type": "collide", "target_type": "groups", "target": "players", "context": "enter_door", "callback": "enter_door"}
+            ]
         }
     },
     "scripts": {
