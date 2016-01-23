@@ -3,10 +3,12 @@ var DungeonExplorer = DungeonExplorer || {};
 
 DungeonExplorer.ShowStatWithText = function (game_state, prefab, properties) {
     "use strict";
-    Engine.ShowStat.call(this, game_state, prefab, properties);
+    DungeonExplorer.ShowStat.call(this, game_state, prefab, properties);
+
+    this.prefab.sprite.anchor.setTo(0);
 };
 
-DungeonExplorer.ShowStatWithText.prototype = Object.create(Engine.ShowStat.prototype);
+DungeonExplorer.ShowStatWithText.prototype = Object.create(DungeonExplorer.ShowStat.prototype);
 DungeonExplorer.ShowStatWithText.prototype.constructor = DungeonExplorer.ShowStatWithText;
 
 DungeonExplorer.ShowStatWithText.prototype.update_stat = function (new_stat) {

@@ -62,6 +62,8 @@ DungeonExplorer.RoomState.prototype.create = function () {
         }
     }
 
+    this.hud = this.game.plugins.add(Engine.HUD, this, this.level_data.hud);
+
     this.groups.doors.forEach(function (door_sprite) {
         var door_prefab;
         door_prefab = this.prefabs[door_sprite.name];

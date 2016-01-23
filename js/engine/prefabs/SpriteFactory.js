@@ -19,12 +19,13 @@ Engine.SpriteFactory = function (game_state) {
 Engine.SpriteFactory.prototype.create_sprite = function (position, params) {
     "use strict";
     var sprite, texture, property, body_property;
-    texture = new this.textures[params.texture.type](this.game_state, params.texture).texture;
     switch (params.type) {
     case "sprite":
+        texture = new this.textures[params.texture.type](this.game_state, params.texture).texture;
         sprite = new Phaser.Sprite(this.game_state.game, position.x, position.y, texture, params.frame);
         break;
     case "tilesprite":
+        texture = new this.textures[params.texture.type](this.game_state, params.texture).texture;
         sprite = new Phaser.TileSprite(this.game_state.game, position.x, position.y, params.width, params.height, texture, params.frame);
         break;
     case "text":

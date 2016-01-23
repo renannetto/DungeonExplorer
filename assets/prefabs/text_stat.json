@@ -3,7 +3,7 @@
         "type": "text",
         "text": "",
         "style": {
-            "font": "14px Arial",
+            "font": "24px Arial",
             "fill": "#FFFFFF"
         },
         "group": "hud"

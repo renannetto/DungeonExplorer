@@ -19,11 +19,21 @@
         "exits",
         "enemies",
         "attacks",
-        "players"
+        "players",
+        "hud"
     ],
     "map": {
         "key": "dungeon_tilemap",
         "tileset": "dungeon_tileset"
     },
-    "user_input": "assets/levels/user_input.json"
+    "user_input": "assets/levels/user_input.json",
+    "hud": {
+        "margins": {"left": 20, "right": 20, "top": 20, "bottom": 20},
+        "elements": {
+            "player_lives": {
+                "type": "text_stat",
+                "position": "top_left"
+            }
+        }
+    }
 }
