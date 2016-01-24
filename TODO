@@ -1,6 +1,9 @@
-show HUD
+character stats (health, attack, moving speed, attack_speed)
+pause screen
+title screen
 populate rooms with items
-fix enemies pathfinding
-fix damage bouncing to respect physics
 improve enemies AI (behavior tree?)
 increase difficulty when clearing levels
+fix enemies pathfinding
+fix damage bouncing to respect physics
+fix player shooting (can't keep pressing spacebar to shoot faster)

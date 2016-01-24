@@ -1,0 +1,19 @@
+{
+    "sprite": {
+        "type": "sprite",
+        "texture": {"type": "asset_key", "asset_key": "heart_image"},
+        "group": "hud",
+        "properties": {
+            "visible": false
+        }
+    },
+    "scripts": {
+        "show_stat_with_sprite": {
+            "prefab_to_show": "player",
+            "script_to_show": "player_health",
+            "property_to_show": "health",
+            "stats_group": "stats",
+            "stats_spacing": {"x": 40, "y": 0}
+        }
+    }
+}

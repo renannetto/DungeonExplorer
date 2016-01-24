@@ -4,6 +4,8 @@
         "bluefire_spritesheet": { "type": "spritesheet", "source": "assets/images/bluefire.png", "frame_width": 32, "frame_height": 32 },
         "exit_image": { "type": "image", "source": "assets/images/portal.png" },
 
+        "heart_image": {"type": "image", "source": "assets/images/heart.png"},
+
         "dungeon_tileset": { "type": "image", "source": "assets/images/dungeon_tileset.png" },
         "dungeon_tilemap": { "type": "tilemap", "source": "assets/maps/example_map.json" },
 
@@ -12,7 +14,8 @@
         "attack": { "type": "prefab", "source": "assets/prefabs/attack.json" },
         "door": { "type": "prefab", "source": "assets/prefabs/door.json" },
         "exit": { "type": "prefab", "source": "assets/prefabs/exit.json" },
-        "text_stat": { "type": "prefab", "source": "assets/prefabs/text_stat.json" }
+        "text_stat": { "type": "prefab", "source": "assets/prefabs/text_stat.json" },
+        "sprite_stat": { "type": "prefab", "source": "assets/prefabs/sprite_stat.json" }
     },
     "groups": [
         "doors",
@@ -20,7 +23,8 @@
         "enemies",
         "attacks",
         "players",
-        "hud"
+        "hud",
+        "stats"
     ],
     "map": {
         "key": "dungeon_tilemap",
@@ -31,7 +35,7 @@
         "margins": {"left": 20, "right": 20, "top": 20, "bottom": 20},
         "elements": {
             "player_lives": {
-                "type": "text_stat",
+                "type": "sprite_stat",
                 "position": "top_left"
             }
         }

@@ -64,7 +64,7 @@
         },
         "player_health": {
             "attack_group": "enemies",
-            "health": 10,
+            "health": 5,
             "bouncing": 10,
             "tween_duration": 0.2
         }
