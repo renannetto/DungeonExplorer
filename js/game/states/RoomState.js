@@ -74,6 +74,19 @@ DungeonExplorer.RoomState.prototype.create = function () {
         exit_prefab = this.prefabs[exit_sprite.name];
         exit_prefab.scripts.reach_exit.listen_to_enemies(this.groups.enemies);
     }, this);
+
+    this.prefabs.pause_menu.scripts.navigate_menu.show(false);
+};
+
+DungeonExplorer.RoomState.prototype.pauseUpdate = function () {
+    "use strict";
+    this.game.input.update();
+};
+
+DungeonExplorer.RoomState.prototype.pause = function (pause) {
+    "use strict";
+    this.game.paused = pause;
+    this.prefabs.pause_menu.scripts.navigate_menu.show(pause);
 };
 
 DungeonExplorer.RoomState.prototype.render = function () {

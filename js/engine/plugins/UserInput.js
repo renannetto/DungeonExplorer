@@ -31,11 +31,17 @@ Engine.UserInput.prototype.init = function (game_state, user_input_data) {
 
 Engine.UserInput.prototype.process_input = function (event) {
     "use strict";
-    var user_input, callback_data, script;
+    var user_input, callback_data, context, method;
     user_input = this.user_inputs[event.type][event.keyCode];
     if (user_input) {
         callback_data = user_input.callback.split(".");
-        script = this.game_state.prefabs[callback_data[0]].scripts[callback_data[1]];
-        script[callback_data[2]].apply(script, user_input.args);
+        if (callback_data.length === 2) {
+            context = this.game_state;
+            method = context[callback_data[1]];
+        } else {
+            context = this.game_state.prefabs[callback_data[0]].scripts[callback_data[1]];
+            method = context[callback_data[2]];
+        }
+        method.apply(context, user_input.args);
     }
 };

@@ -1,9 +1,10 @@
 character stats (health, attack, moving speed, attack_speed)
-pause screen
 title screen
+show mini map
 populate rooms with items
 improve enemies AI (behavior tree?)
 increase difficulty when clearing levels
+allow multiple callbacks for each key in user input
 fix enemies pathfinding
 fix damage bouncing to respect physics
 fix player shooting (can't keep pressing spacebar to shoot faster)

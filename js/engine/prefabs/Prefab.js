@@ -17,8 +17,6 @@ Engine.Prefab = function (game_state, name, sprite) {
 Engine.Prefab.prototype.update = function () {
     "use strict";
     var component_name, script_name;
-    this.sprite.update();
-    
     for (component_name in this.components) {
         if (this.components.hasOwnProperty(component_name)) {
             this.components[component_name].update();

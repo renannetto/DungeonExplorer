@@ -15,6 +15,21 @@
         "D": {
             "callback": "player.player_movement.change_movement",
             "args": [1, 0, true]
+        },
+        "UP": {
+            "callback": "pause_menu.navigate_menu.navigate",
+            "args": [-1]
+        },
+        "DOWN": {
+            "callback": "pause_menu.navigate_menu.navigate",
+            "args": [1]
+        },
+        "ENTER": {
+            "callback": "pause_menu.navigate_menu.select"
+        },
+        "ESC": {
+            "callback": "game_state.pause",
+            "args": [true]
         }
     },
     "keyup": {

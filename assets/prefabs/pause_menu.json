@@ -1,0 +1,21 @@
+{
+    "sprite": {
+        "type": "sprite",
+        "texture": {"type": "asset_key", "asset_key": ""},
+        "group": "ui"
+    },
+    "scripts": {
+        "navigate_menu": {
+            "items_data": [
+                {"text": "Resume", "callback": {"method": "game_state.pause", "args": [false]}}
+            ],
+            "items_style": {
+                "font": "32px Arial",
+                "fill": "#FFFFFF"
+            },
+            "items_spacing": {"x": 0, "y": 50},
+            "ui_group": "ui",
+            "selected_color": "#FFFF00"
+        }
+    }
+}

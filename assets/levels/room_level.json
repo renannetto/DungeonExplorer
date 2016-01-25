@@ -15,7 +15,8 @@
         "door": { "type": "prefab", "source": "assets/prefabs/door.json" },
         "exit": { "type": "prefab", "source": "assets/prefabs/exit.json" },
         "text_stat": { "type": "prefab", "source": "assets/prefabs/text_stat.json" },
-        "sprite_stat": { "type": "prefab", "source": "assets/prefabs/sprite_stat.json" }
+        "sprite_stat": { "type": "prefab", "source": "assets/prefabs/sprite_stat.json" },
+        "pause_menu": { "type": "prefab", "source": "assets/prefabs/pause_menu.json" }
     },
     "groups": [
         "doors",
@@ -24,7 +25,8 @@
         "attacks",
         "players",
         "hud",
-        "stats"
+        "stats",
+        "ui"
     ],
     "map": {
         "key": "dungeon_tilemap",
@@ -37,6 +39,10 @@
             "player_lives": {
                 "type": "sprite_stat",
                 "position": "top_left"
+            },
+            "pause_menu": {
+                "type": "pause_menu",
+                "position": "center"
             }
         }
     }

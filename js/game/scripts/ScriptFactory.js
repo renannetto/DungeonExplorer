@@ -15,7 +15,9 @@ DungeonExplorer.ScriptFactory = function (game_state) {
         "enter_door": DungeonExplorer.EnterDoor.prototype.constructor,
         "reach_exit": DungeonExplorer.ReachExit.prototype.constructor,
         "show_stat_with_sprite": DungeonExplorer.ShowStatWithSprite.prototype.constructor,
-        "show_stat_with_text": DungeonExplorer.ShowStatWithText.prototype.constructor
+        "show_stat_with_text": DungeonExplorer.ShowStatWithText.prototype.constructor,
+        "player_stats": Engine.Script.prototype.constructor,
+        "navigate_menu": DungeonExplorer.NavigateMenu.prototype.constructor
     };
 };
 
