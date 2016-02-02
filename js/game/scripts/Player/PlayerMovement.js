@@ -3,10 +3,15 @@ var DungeonExplorer = DungeonExplorer || {};
 
 DungeonExplorer.PlayerMovement = function (game_state, prefab, properties) {
     "use strict";
-    var walking_state_name, walking_state, standing_state_name, standing_state;
     Engine.Script.call(this, game_state, prefab, properties);
+};
 
-    this.prefab.sprite.body.setSize(24, 24, 0, 8);
+DungeonExplorer.PlayerMovement.prototype = Object.create(Engine.Script.prototype);
+DungeonExplorer.PlayerMovement.prototype.constructor = DungeonExplorer.PlayerMovement;
+
+DungeonExplorer.PlayerMovement.prototype.init = function () {
+    "use strict";
+    var walking_state_name, walking_state, standing_state_name, standing_state;
     this.prefab.sprite.anchor.setTo(0.5, 0.75);
 
     this.movement = {left: false, right: false, up: false, down: false};
@@ -36,9 +41,6 @@ DungeonExplorer.PlayerMovement = function (game_state, prefab, properties) {
     this.commands.walk_down = new Engine.Command("walk", {direction: {x: 0, y: 1}});
     this.commands.stop = new Engine.Command("stop", {});
 };
-
-DungeonExplorer.PlayerMovement.prototype = Object.create(Engine.Script.prototype);
-DungeonExplorer.PlayerMovement.prototype.constructor = DungeonExplorer.PlayerMovement;
 
 DungeonExplorer.PlayerMovement.prototype.update = function () {
     "use strict";

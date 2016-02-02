@@ -87,6 +87,9 @@ DungeonExplorer.RoomState.prototype.pause = function (pause) {
     "use strict";
     this.game.paused = pause;
     this.prefabs.pause_menu.scripts.navigate_menu.show(pause);
+    this.groups.pause_hud.forEach(function (prefab) {
+        prefab.visible = pause;
+    }, this);
 };
 
 DungeonExplorer.RoomState.prototype.render = function () {

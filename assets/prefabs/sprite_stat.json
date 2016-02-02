@@ -10,7 +10,7 @@
     "scripts": {
         "show_stat_with_sprite": {
             "prefab_to_show": "player",
-            "script_to_show": "player_health",
+            "script_to_show": "player_stats",
             "property_to_show": "health",
             "stats_group": "stats",
             "stats_spacing": {"x": 40, "y": 0}

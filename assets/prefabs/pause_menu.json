@@ -1,8 +1,12 @@
 {
     "sprite": {
         "type": "sprite",
-        "texture": {"type": "asset_key", "asset_key": ""},
-        "group": "ui"
+        "texture": {"type": "bitmap", "width": 480, "height": 480, "color": "#000000"},
+        "group": "pause_hud",
+        "properties": {
+            "alpha": 0.5,
+            "visible": false
+        }
     },
     "scripts": {
         "navigate_menu": {

@@ -5,7 +5,13 @@ var DungeonExplorer = DungeonExplorer || {};
 DungeonExplorer.EnterDoor = function (game_state, prefab, properties) {
     "use strict";
     DungeonExplorer.LockedByEnemies.call(this, game_state, prefab, properties);
+};
 
+DungeonExplorer.EnterDoor.prototype = Object.create(DungeonExplorer.LockedByEnemies.prototype);
+DungeonExplorer.EnterDoor.prototype.constructor = DungeonExplorer.EnterDoor;
+
+DungeonExplorer.EnterDoor.prototype.init = function () {
+    "use strict";
     this.player_positions = {
         S: {x: this.game_state.game.world.width / 2, y: 3 * this.prefab.sprite.height / 2},
         W: {x: this.game_state.game.world.width - 3 * this.prefab.sprite.width / 2, y: this.game_state.game.world.height / 2},
@@ -13,9 +19,6 @@ DungeonExplorer.EnterDoor = function (game_state, prefab, properties) {
         E: {x: 3 * this.prefab.sprite.width / 2, y: this.game_state.game.world.height / 2}
     };
 };
-
-DungeonExplorer.EnterDoor.prototype = Object.create(DungeonExplorer.LockedByEnemies.prototype);
-DungeonExplorer.EnterDoor.prototype.constructor = DungeonExplorer.EnterDoor;
 
 DungeonExplorer.EnterDoor.prototype.enter_door = function (door, player) {
     "use strict";

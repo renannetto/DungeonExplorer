@@ -4,14 +4,15 @@ var DungeonExplorer = DungeonExplorer || {};
 DungeonExplorer.ReceiveDamage = function (game_state, prefab, properties) {
     "use strict";
     Engine.PrefabMovement.call(this, game_state, prefab, properties);
-
-    this.initial_health = this.health;
-
-    this.game_state.game.physics.arcade.enable(this.prefab.sprite);
 };
 
 DungeonExplorer.ReceiveDamage.prototype = Object.create(Engine.PrefabMovement.prototype);
 DungeonExplorer.ReceiveDamage.prototype.constructor = DungeonExplorer.ReceiveDamage;
+
+DungeonExplorer.ReceiveDamage.prototype.init = function () {
+    "use strict";
+    this.initial_health = this.health;
+};
 
 DungeonExplorer.ReceiveDamage.prototype.reset = function () {
     "use strict";

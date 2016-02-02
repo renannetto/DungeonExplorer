@@ -4,20 +4,25 @@ var DungeonExplorer = DungeonExplorer || {};
 
 DungeonExplorer.ShowStatWithSprite = function (game_state, prefab, properties) {
     "use strict";
-    var initial_stat, stat_index, stat;
-    this.stats = [];
     DungeonExplorer.ShowStat.call(this, game_state, prefab, properties);
-
-    initial_stat = this.game_state.prefabs[this.prefab_to_show].scripts[this.script_to_show][this.property_to_show];
-    for (stat_index = 0; stat_index < initial_stat; stat_index += 1) {
-        stat = this.create_new_stat_sprite();
-        this.stats.push(stat);
-    }
-    this.stat = initial_stat;
 };
 
 DungeonExplorer.ShowStatWithSprite.prototype = Object.create(DungeonExplorer.ShowStat.prototype);
 DungeonExplorer.ShowStatWithSprite.prototype.constructor = DungeonExplorer.ShowStatWithSprite;
+
+DungeonExplorer.ShowStatWithSprite.prototype.init = function () {
+    "use strict";
+    var initial_stat, stat_index, stat;
+    this.stats = [];
+    initial_stat = this.game_state.prefabs[this.prefab_to_show].scripts[this.script_to_show][this.property_to_show];
+    for (stat_index = 0; stat_index < initial_stat; stat_index += 1) {
+        stat = this.create_new_stat_sprite();
+        stat.visible = this.prefab.sprite.visible;
+        stat.scale.setTo(this.prefab.sprite.scale.x, this.prefab.sprite.scale.y);
+        this.stats.push(stat);
+    }
+    this.stat = initial_stat;
+};
 
 DungeonExplorer.ShowStatWithSprite.prototype.update_stat = function (new_stat) {
     "use strict";

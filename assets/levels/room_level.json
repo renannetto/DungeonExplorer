@@ -5,6 +5,9 @@
         "exit_image": { "type": "image", "source": "assets/images/portal.png" },
 
         "heart_image": {"type": "image", "source": "assets/images/heart.png"},
+        "attack_image": {"type": "image", "source": "assets/images/attack.png"},
+        "shoot_rate_image": {"type": "image", "source": "assets/images/shoot_rate.png"},
+        "speed_image": {"type": "image", "source": "assets/images/speed.png"},
 
         "dungeon_tileset": { "type": "image", "source": "assets/images/dungeon_tileset.png" },
         "dungeon_tilemap": { "type": "tilemap", "source": "assets/maps/example_map.json" },
@@ -25,13 +28,10 @@
         "attacks",
         "players",
         "hud",
+        "pause_hud",
         "stats",
         "ui"
     ],
-    "map": {
-        "key": "dungeon_tilemap",
-        "tileset": "dungeon_tileset"
-    },
     "user_input": "assets/levels/user_input.json",
     "hud": {
         "margins": {"left": 20, "right": 20, "top": 20, "bottom": 20},
@@ -43,6 +43,39 @@
             "pause_menu": {
                 "type": "pause_menu",
                 "position": "center"
+            },
+            "attack_label": {
+                "type": "sprite_stat",
+                "position": "bottom_left",
+                "properties": {
+                    "texture": "attack_image",
+                    "visible": false,
+                    "scale": {"x": 1.5, "y": 1.5},
+                    "show_stat_with_sprite.property_to_show": "attack",
+                    "show_stat_with_sprite.stats_group": "pause_hud"
+                }
+            },
+            "shoot_rate_label": {
+                "type": "sprite_stat",
+                "position": "center_bottom",
+                "properties": {
+                    "texture": "shoot_rate_image",
+                    "visible": false,
+                    "scale": {"x": 1.5, "y": 1.5},
+                    "show_stat_with_sprite.property_to_show": "shoot_rate",
+                    "show_stat_with_sprite.stats_group": "pause_hud"
+                }
+            },
+            "speed_label": {
+                "type": "sprite_stat",
+                "position": "bottom_right",
+                "properties": {
+                    "texture": "speed_image",
+                    "visible": false,
+                    "scale": {"x": 1.5, "y": 1.5},
+                    "show_stat_with_sprite.property_to_show": "speed",
+                    "show_stat_with_sprite.stats_group": "pause_hud"
+                }
             }
         }
     }

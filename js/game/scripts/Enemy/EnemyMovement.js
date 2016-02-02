@@ -4,17 +4,20 @@ var DungeonExplorer = DungeonExplorer || {};
 
 DungeonExplorer.EnemyMovement = function (game_state, prefab, properties) {
     "use strict";
-    var walking_state_name, walking_state, standing_state_name, standing_state;
     Engine.PrefabMovement.call(this, game_state, prefab, properties);
+};
 
-    //this.prefab.sprite.scale.setTo(1, 0.5);
+DungeonExplorer.EnemyMovement.prototype = Object.create(Engine.PrefabMovement.prototype);
+DungeonExplorer.EnemyMovement.prototype.constructor = DungeonExplorer.EnemyMovement;
 
+DungeonExplorer.EnemyMovement.prototype.init = function () {
+    "use strict";
+    var walking_state_name, walking_state, standing_state_name, standing_state;
     this.path = [];
     this.path_step = -1;
 
     this.find_next_path();
 
-    this.prefab.sprite.body.setSize(24, 24, 0, 8);
     this.prefab.sprite.anchor.setTo(0.5, 0.75);
 
     this.animation_state_machine = new Engine.StateMachine();
@@ -42,9 +45,6 @@ DungeonExplorer.EnemyMovement = function (game_state, prefab, properties) {
     this.commands.walk_down = new Engine.Command("walk", {direction: {x: 0, y: 1}});
     this.commands.stop = new Engine.Command("stop", {});
 };
-
-DungeonExplorer.EnemyMovement.prototype = Object.create(Engine.PrefabMovement.prototype);
-DungeonExplorer.EnemyMovement.prototype.constructor = DungeonExplorer.EnemyMovement;
 
 DungeonExplorer.EnemyMovement.prototype.update = function () {
     "use strict";

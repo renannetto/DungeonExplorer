@@ -14,6 +14,16 @@ Engine.Prefab = function (game_state, name, sprite) {
     this.sprite.anchor.setTo(0.5);
 };
 
+Engine.Prefab.prototype.init = function () {
+    "use strict";
+    var script_name;
+    for (script_name in this.scripts) {
+        if (this.scripts.hasOwnProperty(script_name)) {
+            this.scripts[script_name].init();
+        }
+    }
+};
+
 Engine.Prefab.prototype.update = function () {
     "use strict";
     var component_name, script_name;

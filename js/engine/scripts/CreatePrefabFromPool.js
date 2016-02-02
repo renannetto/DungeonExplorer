@@ -3,13 +3,17 @@ var Engine = Engine || {};
 Engine.CreatePrefabFromPool = function (game_state, prefab, properties) {
     "use strict";
     Engine.Script.call(this, game_state, prefab, properties);
-    this.prefab_parameters = JSON.parse(this.game_state.cache.getText(this.prefab_to_create));
-    
-    this.created_prefabs = 0;
 };
 
 Engine.CreatePrefabFromPool.prototype = Object.create(Engine.Script.prototype);
 Engine.CreatePrefabFromPool.prototype.constructor = Engine.CreatePrefabFromPool;
+
+Engine.CreatePrefabFromPool.prototype.init = function () {
+    "use strict";
+    this.prefab_parameters = JSON.parse(this.game_state.cache.getText(this.prefab_to_create));
+
+    this.created_prefabs = 0;
+};
 
 Engine.CreatePrefabFromPool.prototype.create_object = function (position_x, position_y) {
     "use strict";

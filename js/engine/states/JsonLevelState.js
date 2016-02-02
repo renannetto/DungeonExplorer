@@ -46,6 +46,13 @@ Engine.JsonLevelState.prototype.create_prefab = function (type, name, position, 
             if (property.indexOf(".") === -1) {
                 if (property === "texture") {
                     prefab.sprite.loadTexture(properties[property]);
+                } else if (property === "group") {
+                    this.groups[prefab_json.sprite.group].remove(prefab.sprite);
+                    this.groups[properties[property]].add(prefab.sprite);
+                } else if (property === "scale") {
+                    prefab.sprite.scale.setTo(properties[property].x, properties[property].y);
+                } else if (property === "anchor") {
+                    prefab.sprite.anchor.setTo(properties[property].x, properties[property].y);
                 } else {
                     prefab.sprite[property] = properties[property];
                 }
@@ -57,9 +64,7 @@ Engine.JsonLevelState.prototype.create_prefab = function (type, name, position, 
             }
         }
     }
-    if (property_changed) {
-        prefab.reset(position.x, position.y);
-    }
+    prefab.init();
 };
 
 Engine.JsonLevelState.prototype.update = function () {

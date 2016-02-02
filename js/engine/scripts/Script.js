@@ -12,6 +12,10 @@ Engine.Script = function (game_state, prefab, properties) {
     }
 };
 
+Engine.Script.prototype.init = function () {
+    "use strict";
+};
+
 Engine.Script.prototype.update = function () {
     "use strict";
 };

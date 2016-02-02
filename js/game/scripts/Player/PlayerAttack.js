@@ -5,13 +5,16 @@ var DungeonExplorer = DungeonExplorer || {};
 DungeonExplorer.PlayerAttack = function (game_state, prefab, properties) {
     "use strict";
     Engine.CreatePrefabFromPool.call(this, game_state, prefab, properties);
-
-    this.attack_timer = this.game_state.game.time.create();
-    this.attack_timer.loop(Phaser.Timer.SECOND / this.attack_rate, this.shoot, this);
 };
 
 DungeonExplorer.PlayerAttack.prototype = Object.create(Engine.CreatePrefabFromPool.prototype);
 DungeonExplorer.PlayerAttack.prototype.constructor = DungeonExplorer.PlayerAttack;
+
+DungeonExplorer.PlayerAttack.prototype.init = function () {
+    "use strict";
+    this.attack_timer = this.game_state.game.time.create();
+    this.attack_timer.loop(Phaser.Timer.SECOND / this.attack_rate, this.shoot, this);
+};
 
 DungeonExplorer.PlayerAttack.prototype.kill = function () {
     "use strict";

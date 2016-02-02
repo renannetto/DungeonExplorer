@@ -5,6 +5,7 @@ populate rooms with items
 improve enemies AI (behavior tree?)
 increase difficulty when clearing levels
 allow multiple callbacks for each key in user input
+refactor JSONLevelState code to set sprite properties
 fix enemies pathfinding
 fix damage bouncing to respect physics
 fix player shooting (can't keep pressing spacebar to shoot faster)

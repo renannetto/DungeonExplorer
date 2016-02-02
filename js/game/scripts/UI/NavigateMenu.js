@@ -5,7 +5,13 @@ var DungeonExplorer = DungeonExplorer || {};
 DungeonExplorer.NavigateMenu = function (game_state, prefab, properties) {
     "use strict";
     Engine.Script.call(this, game_state, prefab, properties);
+};
 
+DungeonExplorer.NavigateMenu.prototype = Object.create(Engine.Script.prototype);
+DungeonExplorer.NavigateMenu.prototype.constructor = DungeonExplorer.NavigateMenu;
+
+DungeonExplorer.NavigateMenu.prototype.init = function () {
+    "use strict";
     this.items = [];
     this.items_data.forEach(function (item_data) {
         var item_position, item_text;
@@ -20,9 +26,6 @@ DungeonExplorer.NavigateMenu = function (game_state, prefab, properties) {
     this.current_item_index = 0;
     this.items[this.current_item_index].text.fill = this.selected_color;
 };
-
-DungeonExplorer.NavigateMenu.prototype = Object.create(Engine.Script.prototype);
-DungeonExplorer.NavigateMenu.prototype.constructor = DungeonExplorer.NavigateMenu;
 
 DungeonExplorer.NavigateMenu.prototype.navigate = function (direction) {
     "use strict";

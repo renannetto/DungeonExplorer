@@ -6,6 +6,7 @@
     },
     "components": {
         "arcade_body": {
+            "size": {"width": 8, "height": 8, "offset_x": 0, "offset_y": 0},
             "collisions": [
                 {"type": "collide", "target_type": "layers", "target": "collision", "context": "attack_movement", "callback": "hit_wall"}
             ]
