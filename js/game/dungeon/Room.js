@@ -3,12 +3,6 @@ var DungeonExplorer = DungeonExplorer || {};
 
 DungeonExplorer.Room = function (game_state, coordinate, tile_dimensions) {
     "use strict";
-    this.NUMBER_OF_OBSTACLES = {min: 3, max: 5};
-    this.NUMBER_OF_ENEMIES = {min: 1, max: 3};
-    this.OBSTACLE_SIZES = [{x: 1, y: 1}, {x: 1, y: 2}, {x: 1, y: 3},
-                           {x: 2, y: 1}, {x: 3, y: 1}];
-    this.OBSTACLE_LAYER = "collision";
-
     this.game_state = game_state;
     this.coordinate = coordinate;
     this.tile_dimensions = tile_dimensions;
@@ -49,9 +43,9 @@ DungeonExplorer.Room.prototype.template_name = function () {
     return template_name;
 };
 
-DungeonExplorer.Room.prototype.populate = function (obstacle_tiles, enemies_data) {
+DungeonExplorer.Room.prototype.populate = function (population) {
     "use strict";
-    var number_of_rows, number_of_columns, row_index, column_index, number_of_obstacles, number_of_enemies;
+    var number_of_rows, number_of_columns, row_index, column_index, tile_type, number_of_tiles, prefab_type, number_of_prefabs;
     number_of_rows = this.game_state.game.world.height / this.tile_dimensions.y;
     number_of_columns = this.game_state.game.world.width / this.tile_dimensions.x;
     for (row_index = 0; row_index <= number_of_rows; row_index += 1) {
@@ -60,10 +54,20 @@ DungeonExplorer.Room.prototype.populate = function (obstacle_tiles, enemies_data
             this.population[row_index][column_index] = null;
         }
     }
-    number_of_obstacles = this.game_state.game.rnd.between(this.NUMBER_OF_OBSTACLES.min, this.NUMBER_OF_OBSTACLES.max);
-    this.populate_tiles(number_of_obstacles, this.OBSTACLE_LAYER, obstacle_tiles, this.OBSTACLE_SIZES);
-    number_of_enemies = this.game_state.game.rnd.between(this.NUMBER_OF_ENEMIES.min, this.NUMBER_OF_ENEMIES.max);
-    this.populate_prefabs(number_of_enemies, enemies_data);
+
+    for (tile_type in population.tiles) {
+        if (population.tiles.hasOwnProperty(tile_type)) {
+            number_of_tiles = this.game_state.game.rnd.between(population.tiles[tile_type].number.min, population.tiles[tile_type].number.min);
+            this.populate_tiles(number_of_tiles, population.tiles[tile_type].layer, population.tiles[tile_type].possible_tiles, population.tiles[tile_type].sizes);
+        }
+    }
+
+    for (prefab_type in population.prefabs) {
+        if (population.prefabs.hasOwnProperty(prefab_type)) {
+            number_of_prefabs = this.game_state.game.rnd.between(population.prefabs[prefab_type].number.min, population.prefabs[prefab_type].number.min);
+            this.populate_prefabs(number_of_prefabs, population.prefabs[prefab_type].possible_prefabs);
+        }
+    }
 };
 
 DungeonExplorer.Room.prototype.populate_tiles = function (number_of_tiles, layer, possible_tiles, possible_sizes) {
@@ -79,15 +83,17 @@ DungeonExplorer.Room.prototype.populate_tiles = function (number_of_tiles, layer
     }
 };
 
-DungeonExplorer.Room.prototype.populate_prefabs = function (number_of_prefabs, possible_prefabs) {
+DungeonExplorer.Room.prototype.populate_prefabs = function (number_of_prefabs, possible_prefabs_data) {
     "use strict";
-    var index, prefab, tile_position, position;
+    var index, prefab_data, prefab, tile_position, position, properties;
     for (index = 0; index < number_of_prefabs; index += 1) {
-        prefab = this.game_state.game.rnd.pick(possible_prefabs);
+        prefab_data = this.game_state.game.rnd.pick(possible_prefabs_data);
+        prefab = prefab_data.prefab;
         tile_position = this.find_free_region({x: 1, y: 1});
         position = new Phaser.Point((tile_position[0].x * this.tile_dimensions.x) + (this.tile_dimensions.x / 2),
                                 (tile_position[0].y * this.tile_dimensions.y) + (this.tile_dimensions.y / 2));
-        this.prefabs.push({name: prefab + index, prefab: prefab, position: position});
+        properties = prefab_data.properties;
+        this.prefabs.push({name: prefab + index, prefab: prefab, position: position, properties: properties});
     }
 };
 

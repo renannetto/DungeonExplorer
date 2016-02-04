@@ -17,6 +17,7 @@
         "attack": { "type": "prefab", "source": "assets/prefabs/attack.json" },
         "door": { "type": "prefab", "source": "assets/prefabs/door.json" },
         "exit": { "type": "prefab", "source": "assets/prefabs/exit.json" },
+        "item": { "type": "prefab", "source": "assets/prefabs/item.json" },
         "text_stat": { "type": "prefab", "source": "assets/prefabs/text_stat.json" },
         "sprite_stat": { "type": "prefab", "source": "assets/prefabs/sprite_stat.json" },
         "pause_menu": { "type": "prefab", "source": "assets/prefabs/pause_menu.json" }
@@ -24,6 +25,7 @@
     "groups": [
         "doors",
         "exits",
+        "items",
         "enemies",
         "attacks",
         "players",

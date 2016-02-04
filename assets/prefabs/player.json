@@ -2,7 +2,10 @@
     "sprite": {
         "type": "sprite",
         "texture": {"type": "asset_key", "asset_key": "player_spritesheet"},
-        "group": "players"
+        "group": "players",
+        "properties": {
+            "anchor": {"x": 0.5, "y": 0.75}
+        }
     },
     "components": {
         "arcade_body": {

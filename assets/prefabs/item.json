@@ -1,0 +1,24 @@
+{
+    "sprite": {
+        "type": "sprite",
+        "texture": {"type": "asset_key", "asset_key": "attack_image"},
+        "group": "items",
+        "properties": {
+            "anchor": {"x": 0.5, "y": 0.5}
+        }
+    },
+    "components": {
+        "arcade_body": {
+            "immovable": true,
+            "collisions": [
+                {"type": "overlap", "target_type": "groups", "target": "players", "context": "collect_item", "callback": "collect_item"}
+            ]
+        }
+    },
+    "scripts": {
+        "collect_item": {
+            "stat": "attack",
+            "value": 1
+        }
+    }
+}

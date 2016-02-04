@@ -2,7 +2,10 @@
     "sprite": {
         "type": "sprite",
         "texture": {"type": "asset_key", "asset_key": "bluefire_spritesheet"},
-        "group": "attacks"
+        "group": "attacks",
+        "properties": {
+            "anchor": {"x": 0.5, "y": 0.5}
+        }
     },
     "components": {
         "arcade_body": {

@@ -17,7 +17,8 @@ DungeonExplorer.ScriptFactory = function (game_state) {
         "show_stat_with_sprite": DungeonExplorer.ShowStatWithSprite.prototype.constructor,
         "show_stat_with_text": DungeonExplorer.ShowStatWithText.prototype.constructor,
         "player_stats": Engine.Script.prototype.constructor,
-        "navigate_menu": DungeonExplorer.NavigateMenu.prototype.constructor
+        "navigate_menu": DungeonExplorer.NavigateMenu.prototype.constructor,
+        "collect_item": DungeonExplorer.CollectItem.prototype.constructor
     };
 };
 

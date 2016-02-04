@@ -18,8 +18,6 @@ DungeonExplorer.EnemyMovement.prototype.init = function () {
 
     this.find_next_path();
 
-    this.prefab.sprite.anchor.setTo(0.5, 0.75);
-
     this.animation_state_machine = new Engine.StateMachine();
 
     for (walking_state_name in this.walking_states) {

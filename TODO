@@ -1,11 +1,12 @@
-character stats (health, attack, moving speed, attack_speed)
-title screen
+stats being reseted when changing rooms
+title and game over screens
 show mini map
-populate rooms with items
 improve enemies AI (behavior tree?)
 increase difficulty when clearing levels
-allow multiple callbacks for each key in user input
-refactor JSONLevelState code to set sprite properties
+refactor JSONLevelState and SpriteFactory code to set sprite properties
+placing items and player over obstacles
 fix enemies pathfinding
 fix damage bouncing to respect physics
 fix player shooting (can't keep pressing spacebar to shoot faster)
+dungeon state with JSON file containing the room level and population file (will require BootState and LoadingState)
+allow multiple callbacks for each key in user input

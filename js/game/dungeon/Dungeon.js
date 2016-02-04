@@ -3,8 +3,6 @@ var DungeonExplorer = DungeonExplorer || {};
 
 DungeonExplorer.Dungeon = function (game_state) {
     "use strict";
-    this.OBSTACLE_TILES = [35, 37];
-    this.ENEMY_PREFABS = ["enemy"];
     this.EXIT_PREFAB = "exit";
     this.TILE_DIMENSIONS = new Phaser.Point(32, 32);
 
@@ -13,7 +11,7 @@ DungeonExplorer.Dungeon = function (game_state) {
 
 DungeonExplorer.Dungeon.prototype.generate_dungeon = function (number_of_rooms) {
     "use strict";
-    var grid_size, open_rooms, current_room_coordinate, current_room, created_rooms, initial_room_coordinate, final_room_coordinate, max_distance_to_initial_room, distance_to_initial_room;
+    var population, grid_size, open_rooms, current_room_coordinate, current_room, created_rooms, initial_room_coordinate, final_room_coordinate, max_distance_to_initial_room, distance_to_initial_room;
     grid_size = 2 * number_of_rooms;
     this.initialize_grid(grid_size);
 
@@ -30,6 +28,8 @@ DungeonExplorer.Dungeon.prototype.generate_dungeon = function (number_of_rooms) 
         this.check_for_neighbors(current_room, open_rooms);
     }
 
+    population = JSON.parse(this.game_state.game.cache.getText("population"));
+
     max_distance_to_initial_room = 0;
     created_rooms.forEach(function (room) {
         room.neighbor_coordinates().forEach(function (coordinate) {
@@ -37,7 +37,7 @@ DungeonExplorer.Dungeon.prototype.generate_dungeon = function (number_of_rooms) 
                 room.connect(coordinate.direction, this.grid[coordinate.row][coordinate.column]);
             }
         }, this);
-        room.populate(this.OBSTACLE_TILES, this.ENEMY_PREFABS);
+        room.populate(population);
         distance_to_initial_room = Math.abs(room.coordinate.column - initial_room_coordinate.x) + Math.abs(room.coordinate.row - initial_room_coordinate.y);
         if (distance_to_initial_room > max_distance_to_initial_room) {
             final_room_coordinate.x = room.coordinate.column;
@@ -45,27 +45,9 @@ DungeonExplorer.Dungeon.prototype.generate_dungeon = function (number_of_rooms) 
         }
     }, this);
 
-    this.grid[final_room_coordinate.y][final_room_coordinate.x].populate_prefabs(1, [this.EXIT_PREFAB]);
-
-    this.print_grid();
+    this.grid[final_room_coordinate.y][final_room_coordinate.x].populate_prefabs(1, [{prefab: this.EXIT_PREFAB, properties: {}}]);
 
     return this.grid[initial_room_coordinate.y][initial_room_coordinate.x];
-};
-
-DungeonExplorer.Dungeon.prototype.print_grid = function () {
-    "use strict";
-    var row_index, column_index, row;
-    for (row_index = 0; row_index < this.grid.length; row_index += 1) {
-        row = "";
-        for (column_index = 0; column_index < this.grid[row_index].length; column_index += 1) {
-            if (this.grid[row_index][column_index]) {
-                row += "R";
-            } else {
-                row += "X";
-            }
-        }
-        console.log(row);
-    }
 };
 
 DungeonExplorer.Dungeon.prototype.initialize_grid = function (grid_size) {

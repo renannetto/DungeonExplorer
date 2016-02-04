@@ -4,7 +4,8 @@
         "texture": {"type": "asset_key", "asset_key": "player_spritesheet"},
         "group": "enemies",
         "properties": {
-            "frame": 10
+            "frame": 10,
+            "anchor": {"x": 0.5, "y": 0.75}
         }
     },
     "components": {

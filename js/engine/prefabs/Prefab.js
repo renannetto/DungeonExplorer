@@ -10,8 +10,6 @@ Engine.Prefab = function (game_state, name, sprite) {
     this.components = {};
     
     this.game_state.prefabs[name] = this;
-    
-    this.sprite.anchor.setTo(0.5);
 };
 
 Engine.Prefab.prototype.init = function () {

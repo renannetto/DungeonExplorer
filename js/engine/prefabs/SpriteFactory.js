@@ -39,14 +39,20 @@ Engine.SpriteFactory.prototype.create_sprite = function (position, params) {
         this.game_state.game.add.existing(sprite);
     }
     
-    for (property in params.properties) {
-        if (params.properties.hasOwnProperty(property)) {
-            sprite[property] = params.properties[property];
-        }
-    }
-
     if (params.body) {
         this.bodies[params.body.physics].call(this, sprite, params.body);
+    }
+
+    for (property in params.properties) {
+        if (params.properties.hasOwnProperty(property)) {
+            if (property === "anchor") {
+                sprite.anchor.setTo(params.properties[property].x, params.properties[property].y);
+            } else if (property === "scale") {
+                sprite.scale.setTo(params.properties[property].x, params.properties[property].y);
+            } else {
+                sprite[property] = params.properties[property];
+            }
+        }
     }
 
     return sprite;

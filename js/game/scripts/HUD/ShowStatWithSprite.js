@@ -17,8 +17,6 @@ DungeonExplorer.ShowStatWithSprite.prototype.init = function () {
     initial_stat = this.game_state.prefabs[this.prefab_to_show].scripts[this.script_to_show][this.property_to_show];
     for (stat_index = 0; stat_index < initial_stat; stat_index += 1) {
         stat = this.create_new_stat_sprite();
-        stat.visible = this.prefab.sprite.visible;
-        stat.scale.setTo(this.prefab.sprite.scale.x, this.prefab.sprite.scale.y);
         this.stats.push(stat);
     }
     this.stat = initial_stat;
@@ -26,13 +24,18 @@ DungeonExplorer.ShowStatWithSprite.prototype.init = function () {
 
 DungeonExplorer.ShowStatWithSprite.prototype.update_stat = function (new_stat) {
     "use strict";
-    var stat_difference, prefab_index, stat, stat_position;
+    var stat_difference, stat_index, stat;
+    stat_difference = Math.abs(new_stat - this.stat);
     if (new_stat > this.stat) {
-        stat = this.create_new_stat_sprite();
-        this.stats.push(stat);
+        for (stat_index = 0; stat_index < stat_difference; stat_index += 1) {
+            stat = this.create_new_stat_sprite();
+            this.stats.push(stat);
+        }
     } else {
-        stat = this.stats.pop();
-        stat.kill();
+        for (stat_index = 0; stat_index < stat_difference; stat_index += 1) {
+            stat = this.stats.pop();
+            stat.kill();
+        }
     }
     DungeonExplorer.ShowStat.prototype.update_stat.call(this, new_stat);
 };
@@ -48,6 +51,8 @@ DungeonExplorer.ShowStatWithSprite.prototype.create_new_stat_sprite = function (
     } else {
         stat = this.game_state.groups[this.stats_group].create(stat_position.x, stat_position.y, this.prefab.sprite.texture);
     }
-    stat.anchor.setTo(0.5);
+    stat.anchor.setTo(this.prefab.sprite.anchor.x, this.prefab.sprite.anchor.y);
+    stat.visible = this.prefab.sprite.visible;
+    stat.scale.setTo(this.prefab.sprite.scale.x, this.prefab.sprite.scale.y);
     return stat;
 };

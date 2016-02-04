@@ -4,8 +4,6 @@ var DungeonExplorer = DungeonExplorer || {};
 DungeonExplorer.ShowStatWithText = function (game_state, prefab, properties) {
     "use strict";
     DungeonExplorer.ShowStat.call(this, game_state, prefab, properties);
-
-    this.prefab.sprite.anchor.setTo(0);
 };
 
 DungeonExplorer.ShowStatWithText.prototype = Object.create(DungeonExplorer.ShowStat.prototype);

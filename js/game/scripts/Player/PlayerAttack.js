@@ -12,6 +12,7 @@ DungeonExplorer.PlayerAttack.prototype.constructor = DungeonExplorer.PlayerAttac
 
 DungeonExplorer.PlayerAttack.prototype.init = function () {
     "use strict";
+    Engine.CreatePrefabFromPool.prototype.init.call(this);
     this.attack_timer = this.game_state.game.time.create();
     this.attack_timer.loop(Phaser.Timer.SECOND / this.attack_rate, this.shoot, this);
 };

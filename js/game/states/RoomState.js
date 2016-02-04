@@ -58,7 +58,7 @@ DungeonExplorer.RoomState.prototype.create = function () {
 
     if (this.cleared_rooms.indexOf(this.room.template_name()) === -1) {
         for (prefab_index = 0; prefab_index < this.room.prefabs.length; prefab_index += 1) {
-            this.create_prefab(this.room.prefabs[prefab_index].prefab, this.room.prefabs[prefab_index].name, this.room.prefabs[prefab_index].position, {});
+            this.create_prefab(this.room.prefabs[prefab_index].prefab, this.room.prefabs[prefab_index].name, this.room.prefabs[prefab_index].position, this.room.prefabs[prefab_index].properties);
         }
     }
 

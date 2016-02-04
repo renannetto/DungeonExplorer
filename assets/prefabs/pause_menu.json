@@ -5,7 +5,8 @@
         "group": "pause_hud",
         "properties": {
             "alpha": 0.5,
-            "visible": false
+            "visible": false,
+            "anchor": {"x": 0.5, "y": 0.5}
         }
     },
     "scripts": {

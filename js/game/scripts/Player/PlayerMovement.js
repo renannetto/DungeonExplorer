@@ -12,6 +12,7 @@ DungeonExplorer.PlayerMovement.prototype.constructor = DungeonExplorer.PlayerMov
 DungeonExplorer.PlayerMovement.prototype.init = function () {
     "use strict";
     var walking_state_name, walking_state, standing_state_name, standing_state;
+
     this.prefab.sprite.anchor.setTo(0.5, 0.75);
 
     this.movement = {left: false, right: false, up: false, down: false};

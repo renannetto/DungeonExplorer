@@ -4,7 +4,8 @@
         "texture": {"type": "asset_key", "asset_key": "heart_image"},
         "group": "hud",
         "properties": {
-            "visible": false
+            "visible": false,
+            "anchor": {"x": 0.5, "y": 0.5}
         }
     },
     "scripts": {
