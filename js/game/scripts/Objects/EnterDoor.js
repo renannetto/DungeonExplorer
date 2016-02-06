@@ -20,13 +20,21 @@ DungeonExplorer.EnterDoor.prototype.init = function () {
     };
 };
 
-DungeonExplorer.EnterDoor.prototype.enter_door = function (door, player) {
+DungeonExplorer.EnterDoor.prototype.enter_door = function () {
     "use strict";
-    var next_room;
+    var next_room, persistent_data;
     if (!this.locked) {
         next_room = this.game_state.room.neighbors[this.direction];
-        this.game_state.player_position = this.player_positions[this.direction];
-        this.game_state.cleared_rooms.push(this.game_state.room.template_name());
+        this.save_persistent_data();
         this.game_state.game.state.start("BootState", true, false, "RoomState", "assets/levels/room_level.json", {room: next_room});
     }
+};
+
+DungeonExplorer.EnterDoor.prototype.save_persistent_data = function () {
+    "use strict";
+    this.game_state.player_position = this.player_positions[this.direction];
+    this.game_state.cleared_rooms.push(this.game_state.room.template_name());
+    this.game_state.persistent_data.player = {
+        "player_stats.stats": this.game_state.prefabs.player.scripts.player_stats.stats
+    };
 };

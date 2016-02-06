@@ -72,10 +72,12 @@
             "tween_duration": 0.2
         },
         "player_stats": {
-            "health": 5,
-            "speed": 1,
-            "shoot_rate": 1,
-            "attack": 1
+            "stats": {
+                "health": 5,
+                "speed": 1,
+                "shoot_rate": 1,
+                "attack": 1
+            }
         }
     }
 }

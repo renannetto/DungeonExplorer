@@ -29,6 +29,8 @@ DungeonExplorer.RoomState.prototype.init = function (level_data, extra_parameter
     this.player_position = this.player_position || new Phaser.Point(this.game.world.width / 2, this.game.world.height / 2);
 
     this.cleared_rooms = this.cleared_rooms || [];
+    
+    this.persistent_data = this.persistent_data || {};
 };
 
 DungeonExplorer.RoomState.prototype.preload = function () {
@@ -76,6 +78,24 @@ DungeonExplorer.RoomState.prototype.create = function () {
     }, this);
 
     this.prefabs.pause_menu.scripts.navigate_menu.show(false);
+    
+    this.restore_persistent_data();
+};
+
+DungeonExplorer.RoomState.prototype.restore_persistent_data = function () {
+    "use strict";
+    var prefab_name, property, script_name, property_name;
+    for (prefab_name in this.persistent_data) {
+        if (this.persistent_data.hasOwnProperty(prefab_name)) {
+            for (property in this.persistent_data[prefab_name]) {
+                if (this.persistent_data[prefab_name].hasOwnProperty(property)) {
+                    script_name = property.split(".")[0];
+                    property_name = property.split(".")[1];
+                    this.prefabs[prefab_name].scripts[script_name][property_name] = this.persistent_data[prefab_name][property];
+                }
+            }
+        }
+    }
 };
 
 DungeonExplorer.RoomState.prototype.pauseUpdate = function () {

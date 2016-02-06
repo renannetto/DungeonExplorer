@@ -57,7 +57,6 @@ Engine.JsonLevelState.prototype.create_prefab = function (type, name, position, 
                     prefab.sprite[property] = properties[property];
                 }
             } else {
-                property_changed = true;
                 script_name = property.split(".")[0];
                 property_name = property.split(".")[1];
                 prefab.scripts[script_name][property_name] = properties[property];

@@ -12,7 +12,7 @@ DungeonExplorer.ShowStat.prototype.constructor = DungeonExplorer.ShowStat;
 DungeonExplorer.ShowStat.prototype.update = function () {
     "use strict";
     var new_stat;
-    new_stat = this.game_state.prefabs[this.prefab_to_show].scripts[this.script_to_show][this.property_to_show];
+    new_stat = this.game_state.prefabs[this.prefab_to_show].scripts[this.script_to_show].stats[this.property_to_show];
     if (this.stat !== new_stat) {
         this.update_stat(new_stat);
     }

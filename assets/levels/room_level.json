@@ -40,7 +40,11 @@
         "elements": {
             "player_lives": {
                 "type": "sprite_stat",
-                "position": "top_left"
+                "position": "top_left",
+                "properties": {
+                    "texture": "heart_image",
+                    "show_stat_with_sprite.property_to_show": "health"
+                }
             },
             "pause_menu": {
                 "type": "pause_menu",
