@@ -2,7 +2,7 @@
     "sprite": {
         "type": "sprite",
         "texture": {"type": "bitmap", "width": 480, "height": 480, "color": "#000000"},
-        "group": "pause_hud",
+        "group": "ui",
         "properties": {
             "alpha": 0.5,
             "visible": false,
@@ -12,7 +12,6 @@
     "scripts": {
         "navigate_menu": {
             "items_data": [
-                {"text": "Resume", "callback": {"method": "game_state.pause", "args": [false]}}
             ],
             "items_style": {
                 "font": "32px Arial",

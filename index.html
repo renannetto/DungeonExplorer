@@ -46,6 +46,7 @@
 
         <script src="js/game/states/DungeonState.js"></script>
         <script src="js/game/states/RoomState.js"></script>
+        <script src="js/game/states/TitleState.js"></script>
 
         <script src="js/game/dungeon/Dungeon.js"></script>
         <script src="js/game/dungeon/Room.js"></script>
@@ -95,7 +96,9 @@
             game.state.add("LoadingState", new Engine.LoadingState());
             game.state.add("DungeonState", new DungeonExplorer.DungeonState());
             game.state.add("RoomState", new DungeonExplorer.RoomState());
-            game.state.start("DungeonState", true, false, 10);
+            game.state.add("TitleState", new DungeonExplorer.TitleState());
+            game.state.start("BootState", true, false, "TitleState", "assets/levels/title_screen.json");
+            //game.state.start("DungeonState", true, false, 10);
         </script>
 	</body>
 </html>

@@ -1,0 +1,29 @@
+{
+    "world": {"origin_x": 0, "origin_y": 0, "width": 480, "height": 480},
+    "assets": {
+        "text": { "type": "prefab", "source": "assets/prefabs/text.json" },
+        "menu": { "type": "prefab", "source": "assets/prefabs/menu.json" }
+    },
+    "groups": [
+        "hud",
+        "ui"
+    ],
+    "user_input": "assets/levels/title_screen_user_input.json",
+    "prefabs": {
+        "title": {
+            "type": "text",
+            "position": {"x": 240, "y": 120},
+            "properties": {
+                "fontSize": 48,
+                "text": "Dungeon Explorer"
+            }
+        },
+        "menu": {
+            "type": "menu",
+            "position": {"x": 240, "y": 240},
+            "properties": {
+                "navigate_menu.items_data": [{"text": "Start game", "callback": {"method": "game_state.start_game"}}]
+            }
+        }
+    }
+}

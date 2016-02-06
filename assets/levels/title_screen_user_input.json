@@ -1,0 +1,7 @@
+{
+    "keydown": {
+        "ENTER": {
+            "callback": "menu.navigate_menu.select"
+        }
+    }
+}

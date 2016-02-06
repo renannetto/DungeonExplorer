@@ -20,7 +20,7 @@
         "item": { "type": "prefab", "source": "assets/prefabs/item.json" },
         "text_stat": { "type": "prefab", "source": "assets/prefabs/text_stat.json" },
         "sprite_stat": { "type": "prefab", "source": "assets/prefabs/sprite_stat.json" },
-        "pause_menu": { "type": "prefab", "source": "assets/prefabs/pause_menu.json" }
+        "menu": { "type": "prefab", "source": "assets/prefabs/menu.json" }
     },
     "groups": [
         "doors",
@@ -34,7 +34,7 @@
         "stats",
         "ui"
     ],
-    "user_input": "assets/levels/user_input.json",
+    "user_input": "assets/levels/game_user_input.json",
     "hud": {
         "margins": {"left": 20, "right": 20, "top": 20, "bottom": 20},
         "elements": {
@@ -47,8 +47,12 @@
                 }
             },
             "pause_menu": {
-                "type": "pause_menu",
-                "position": "center"
+                "type": "menu",
+                "position": "center",
+                "group": "pause_hud",
+                "properties": {
+                    "navigate_menu.items_data": [{"text": "Resume", "callback": {"method": "game_state.pause", "args": [false]}}]
+                }
             },
             "attack_label": {
                 "type": "sprite_stat",
