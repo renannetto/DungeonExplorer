@@ -1,0 +1,20 @@
+{
+    "sprite": {
+        "type": "sprite",
+        "texture": {"type": "bitmap", "width": 480, "height": 480, "color": "#000000"},
+        "group": "ui",
+        "properties": {
+            "alpha": 0.5,
+            "visible": false,
+            "anchor": {"x": 0.5, "y": 0.5}
+        }
+    },
+    "scripts": {
+        "show_game_over": {
+            "text_style": {
+                "font": "32px Arial",
+                "fill": "#FFFFFF"
+            }
+        }
+    }
+}

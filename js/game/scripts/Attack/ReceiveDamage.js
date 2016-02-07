@@ -36,10 +36,15 @@ DungeonExplorer.ReceiveDamage.prototype.damage = function (attacked, attack) {
     damage = attack_prefab.scripts.cause_damage.damage;
     this.health -= damage;
     if (this.health <= 0) {
-        this.prefab.kill();
+        this.die();
     }
 
     if (attack_prefab.scripts.cause_damage.destroy) {
         attack_prefab.kill();
     }
+};
+
+DungeonExplorer.ReceiveDamage.prototype.die = function () {
+    "use strict";
+    this.prefab.kill();
 };

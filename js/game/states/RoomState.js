@@ -98,6 +98,11 @@ DungeonExplorer.RoomState.prototype.restore_persistent_data = function () {
     }
 };
 
+DungeonExplorer.RoomState.prototype.game_over = function () {
+    "use strict";
+    this.prefabs.game_over_panel.scripts.show_game_over.show();
+};
+
 DungeonExplorer.RoomState.prototype.pauseUpdate = function () {
     "use strict";
     this.game.input.update();
