@@ -13,7 +13,10 @@
             "script_to_show": "player_stats",
             "property_to_show": "health",
             "stats_group": "stats",
-            "stats_spacing": {"x": 40, "y": 0}
+            "stats_spacing": {"x": 40, "y": 0},
+            "stats_properties": {
+                "anchor": {"x": 0.5, "y": 0.5}
+            }
         }
     }
 }

@@ -30,10 +30,10 @@
         "enemies",
         "attacks",
         "players",
+        "ui",
         "hud",
         "pause_hud",
-        "stats",
-        "ui"
+        "stats"
     ],
     "user_input": "assets/levels/game_user_input.json",
     "hud": {
@@ -60,10 +60,14 @@
                 "position": "bottom_left",
                 "properties": {
                     "texture": "attack_image",
-                    "visible": false,
                     "scale": {"x": 1.5, "y": 1.5},
                     "show_stat_with_sprite.property_to_show": "attack",
-                    "show_stat_with_sprite.stats_group": "pause_hud"
+                    "show_stat_with_sprite.stats_group": "pause_hud",
+                    "show_stat_with_sprite.stats_properties": {
+                        "visible": false,
+                        "scale": {"x": 1.5, "y": 1.5},
+                        "anchor": {"x": 0.5, "y": 0.5}
+                    }
                 }
             },
             "shoot_rate_label": {
@@ -71,10 +75,14 @@
                 "position": "center_bottom",
                 "properties": {
                     "texture": "shoot_rate_image",
-                    "visible": false,
                     "scale": {"x": 1.5, "y": 1.5},
                     "show_stat_with_sprite.property_to_show": "shoot_rate",
-                    "show_stat_with_sprite.stats_group": "pause_hud"
+                    "show_stat_with_sprite.stats_group": "pause_hud",
+                    "show_stat_with_sprite.stats_properties": {
+                        "visible": false,
+                        "scale": {"x": 1.5, "y": 1.5},
+                        "anchor": {"x": 0.5, "y": 0.5}
+                    }
                 }
             },
             "speed_label": {
@@ -82,10 +90,14 @@
                 "position": "bottom_right",
                 "properties": {
                     "texture": "speed_image",
-                    "visible": false,
                     "scale": {"x": 1.5, "y": 1.5},
                     "show_stat_with_sprite.property_to_show": "speed",
-                    "show_stat_with_sprite.stats_group": "pause_hud"
+                    "show_stat_with_sprite.stats_group": "pause_hud",
+                    "show_stat_with_sprite.stats_properties": {
+                        "visible": false,
+                        "scale": {"x": 1.5, "y": 1.5},
+                        "anchor": {"x": 0.5, "y": 0.5}
+                    }
                 }
             },
             "game_over_panel": {

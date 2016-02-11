@@ -12,6 +12,11 @@ DungeonExplorer.PlayerHealth = function (game_state, prefab, properties) {
 DungeonExplorer.PlayerHealth.prototype = Object.create(DungeonExplorer.ReceiveDamage.prototype);
 DungeonExplorer.PlayerHealth.prototype.constructor = DungeonExplorer.PlayerHealth;
 
+DungeonExplorer.PlayerHealth.prototype.update = function () {
+    "use strict";
+    this.health = this.prefab.scripts.player_stats.stats.health;
+};
+
 DungeonExplorer.PlayerHealth.prototype.damage = function (attacked, attack) {
     "use strict";
     var damage_tween, damage;

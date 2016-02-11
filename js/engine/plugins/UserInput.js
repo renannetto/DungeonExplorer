@@ -27,21 +27,25 @@ Engine.UserInput.prototype.init = function (game_state, user_input_data) {
     }
 
     this.game.input.keyboard.addCallbacks(this, this.process_input, this.process_input, null);
+
+    this.enabled = true;
 };
 
 Engine.UserInput.prototype.process_input = function (event) {
     "use strict";
     var user_input, callback_data, context, method;
-    user_input = this.user_inputs[event.type][event.keyCode];
-    if (user_input) {
-        callback_data = user_input.callback.split(".");
-        if (callback_data.length === 2) {
-            context = this.game_state;
-            method = context[callback_data[1]];
-        } else {
-            context = this.game_state.prefabs[callback_data[0]].scripts[callback_data[1]];
-            method = context[callback_data[2]];
+    if (this.enabled) {
+        user_input = this.user_inputs[event.type][event.keyCode];
+        if (user_input) {
+            callback_data = user_input.callback.split(".");
+            if (callback_data.length === 2) {
+                context = this.game_state;
+                method = context[callback_data[1]];
+            } else {
+                context = this.game_state.prefabs[callback_data[0]].scripts[callback_data[1]];
+                method = context[callback_data[2]];
+            }
+            method.apply(context, user_input.args);
         }
-        method.apply(context, user_input.args);
     }
 };

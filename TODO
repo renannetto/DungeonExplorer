@@ -1,4 +1,4 @@
-deactive user input on game over screen
+make player stats work (attack, speed and shoot rate)
 show mini map
 improve enemies AI (behavior tree?)
 increase difficulty when clearing levels

@@ -15,13 +15,14 @@ DungeonExplorer.ShowGameOver.prototype.show = function () {
     var game_over_message, restart_message;
     this.prefab.sprite.visible = true;
     
-    game_over_message = new Phaser.Text(this.game_state.game, this.prefab.sprite.x, this.prefab.sprite.y, "Game Over", this.text_style);
-    game_over_message.anchor.setTo(0.5);
-    this.game_state.groups.hud.add(game_over_message);
-    
-    restart_message = new Phaser.Text(this.game_state.game, this.prefab.sprite.x, this.prefab.sprite.y + 100, "click to restart", this.text_style);
-    restart_message.anchor.setTo(0.5);
-    this.game_state.groups.hud.add(restart_message);
+    this.messages.forEach(function (message) {
+        var message_sprite;
+        message_sprite = new Phaser.Text(this.game_state.game, this.prefab.sprite.x + message.offset.x, this.prefab.sprite.y + message.offset.y,
+                                        message.text, message.style);
+        message_sprite.anchor.setTo(this.prefab.sprite.anchor.x, this.prefab.sprite.anchor.y);
+        this.game_state.groups[message.group].add(message_sprite);
+
+    }, this);
     
     this.prefab.sprite.inputEnabled = true;
     this.prefab.sprite.events.onInputDown.add(this.restart, this);

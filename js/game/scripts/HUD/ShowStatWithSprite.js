@@ -13,6 +13,7 @@ DungeonExplorer.ShowStatWithSprite.prototype.constructor = DungeonExplorer.ShowS
 DungeonExplorer.ShowStatWithSprite.prototype.init = function () {
     "use strict";
     var initial_stat, stat_index, stat;
+    this.prefab.sprite.visible = false;
     this.stats = [];
     initial_stat = this.game_state.prefabs[this.prefab_to_show].scripts[this.script_to_show].stats[this.property_to_show];
     for (stat_index = 0; stat_index < initial_stat; stat_index += 1) {
@@ -42,7 +43,7 @@ DungeonExplorer.ShowStatWithSprite.prototype.update_stat = function (new_stat) {
 
 DungeonExplorer.ShowStatWithSprite.prototype.create_new_stat_sprite = function () {
     "use strict";
-    var stat_position, stat;
+    var stat_position, stat, stat_property;
     stat_position = new Phaser.Point(this.prefab.sprite.x + (this.stats.length * this.stats_spacing.x),
                                           this.prefab.sprite.y + (this.stats.length * this.stats_spacing.y));
     stat = this.game_state.groups[this.stats_group].getFirstDead();
@@ -51,8 +52,16 @@ DungeonExplorer.ShowStatWithSprite.prototype.create_new_stat_sprite = function (
     } else {
         stat = this.game_state.groups[this.stats_group].create(stat_position.x, stat_position.y, this.prefab.sprite.texture);
     }
-    stat.anchor.setTo(this.prefab.sprite.anchor.x, this.prefab.sprite.anchor.y);
-    stat.visible = this.prefab.sprite.visible;
-    stat.scale.setTo(this.prefab.sprite.scale.x, this.prefab.sprite.scale.y);
+    for (stat_property in this.stats_properties) {
+        if (this.stats_properties.hasOwnProperty(stat_property)) {
+            if (stat_property === "anchor") {
+                stat[stat_property].setTo(this.stats_properties[stat_property].x, this.stats_properties[stat_property].y);
+            } else if (stat_property === "scale") {
+                stat[stat_property].setTo(this.stats_properties[stat_property].x, this.stats_properties[stat_property].y);
+            } else {
+                stat[stat_property] = this.stats_properties[stat_property];
+            }
+        }
+    }
     return stat;
 };

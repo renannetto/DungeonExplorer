@@ -72,28 +72,32 @@ DungeonExplorer.Room.prototype.populate = function (population) {
 
 DungeonExplorer.Room.prototype.populate_tiles = function (number_of_tiles, layer, possible_tiles, possible_sizes) {
     "use strict";
-    var index, tile, region_size, region, coordinate_index;
+    var index, tile_id, region_size, region, coordinate_index, tile;
     for (index = 0; index < number_of_tiles; index += 1) {
-        tile = this.game_state.game.rnd.pick(possible_tiles);
+        tile_id = this.game_state.game.rnd.pick(possible_tiles);
         region_size = this.game_state.game.rnd.pick(possible_sizes);
         region = this.find_free_region(region_size);
         for (coordinate_index = 0; coordinate_index < region.length; coordinate_index += 1) {
-            this.tiles.push({layer: layer, tile: tile, position: region[coordinate_index]});
+            tile = {layer: layer, tile: tile_id, position: region[coordinate_index]};
+            this.tiles.push(tile);
+            this.population[region[coordinate_index].y][region[coordinate_index].x] = tile;
         }
     }
 };
 
 DungeonExplorer.Room.prototype.populate_prefabs = function (number_of_prefabs, possible_prefabs_data) {
     "use strict";
-    var index, prefab_data, prefab, tile_position, position, properties;
+    var index, prefab_data, prefab_type, tile_position, position, properties, prefab;
     for (index = 0; index < number_of_prefabs; index += 1) {
         prefab_data = this.game_state.game.rnd.pick(possible_prefabs_data);
-        prefab = prefab_data.prefab;
+        prefab_type = prefab_data.prefab;
         tile_position = this.find_free_region({x: 1, y: 1});
         position = new Phaser.Point((tile_position[0].x * this.tile_dimensions.x) + (this.tile_dimensions.x / 2),
                                 (tile_position[0].y * this.tile_dimensions.y) + (this.tile_dimensions.y / 2));
         properties = prefab_data.properties;
-        this.prefabs.push({name: prefab + index, prefab: prefab, position: position, properties: properties});
+        prefab = {name: prefab_type + index, prefab: prefab_type, position: position, properties: properties};
+        this.prefabs.push(prefab);
+        this.population[tile_position[0].y][tile_position[0].x] = prefab;
     }
 };
 

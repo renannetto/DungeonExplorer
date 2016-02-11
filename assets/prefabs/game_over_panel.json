@@ -11,10 +11,26 @@
     },
     "scripts": {
         "show_game_over": {
-            "text_style": {
-                "font": "32px Arial",
-                "fill": "#FFFFFF"
-            }
+            "messages": [
+                {
+                    "offset": {"x": 0, "y": 0},
+                    "text": "Game Over",
+                    "style": {
+                        "font": "32px Arial",
+                        "fill": "#FFFFFF"
+                    },
+                    "group": "hud"
+                },
+                {
+                    "offset": {"x": 0, "y": 100},
+                    "text": "click to restart",
+                    "style": {
+                        "font": "24px Arial",
+                        "fill": "#FFFFFF"
+                    },
+                    "group": "hud"
+                }
+            ]
         }
     }
 }
