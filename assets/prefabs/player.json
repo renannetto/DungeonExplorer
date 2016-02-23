@@ -26,7 +26,7 @@
     },
     "scripts": {
         "player_movement": {
-            "walking_speed": 100,
+            "base_speed": 100,
             "walking_states": {
                 "walk_left": {
                     "animation_name": "walking_left",
@@ -63,7 +63,8 @@
         "player_attack": {
             "pool": "attacks",
             "prefab_to_create": "attack",
-            "attack_rate": 1
+            "base_shoot_rate": 1,
+            "base_damage": 1
         },
         "player_health": {
             "attack_group": "enemies",
@@ -76,7 +77,7 @@
                 "health": 2,
                 "speed": 1,
                 "shoot_rate": 1,
-                "attack": 1
+                "attack": 1.5
             }
         }
     }

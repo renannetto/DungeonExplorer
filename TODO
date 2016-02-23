@@ -1,7 +1,7 @@
-make player stats work (attack, speed and shoot rate)
 show mini map
 improve enemies AI (behavior tree?)
 increase difficulty when clearing levels
+add items that change gameplay
 refactor JSONLevelState and SpriteFactory code to set sprite properties
 placing items and player over obstacles
 fix enemies pathfinding

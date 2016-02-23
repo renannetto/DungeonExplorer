@@ -45,13 +45,15 @@ DungeonExplorer.PlayerMovement.prototype.init = function () {
 
 DungeonExplorer.PlayerMovement.prototype.update = function () {
     "use strict";
+    var speed_bonus;
+    speed_bonus = this.prefab.scripts.player_stats.stats.speed;
     if (this.movement.left && this.prefab.sprite.body.velocity.x <= 0) {
-        this.prefab.sprite.body.velocity.x = -this.walking_speed;
+        this.prefab.sprite.body.velocity.x = -(this.base_speed * speed_bonus);
         if (this.prefab.sprite.body.velocity.y === 0) {
             this.animation_state_machine.handle_input(this.commands.walk_left);
         }
     } else if (this.movement.right && this.prefab.sprite.body.velocity.x >= 0) {
-        this.prefab.sprite.body.velocity.x = +this.walking_speed;
+        this.prefab.sprite.body.velocity.x = (this.base_speed * speed_bonus);
         if (this.prefab.sprite.body.velocity.y === 0) {
             this.animation_state_machine.handle_input(this.commands.walk_right);
         }
@@ -60,12 +62,12 @@ DungeonExplorer.PlayerMovement.prototype.update = function () {
     }
 
     if (this.movement.up && this.prefab.sprite.body.velocity.y <= 0) {
-        this.prefab.sprite.body.velocity.y = -this.walking_speed;
+        this.prefab.sprite.body.velocity.y = -(this.base_speed * speed_bonus);
         if (this.prefab.sprite.body.velocity.x === 0) {
             this.animation_state_machine.handle_input(this.commands.walk_up);
         }
     } else if (this.movement.down && this.prefab.sprite.body.velocity.y >= 0) {
-        this.prefab.sprite.body.velocity.y = +this.walking_speed;
+        this.prefab.sprite.body.velocity.y = (this.base_speed * speed_bonus);
         if (this.prefab.sprite.body.velocity.x === 0) {
             this.animation_state_machine.handle_input(this.commands.walk_down);
         }
