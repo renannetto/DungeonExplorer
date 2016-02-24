@@ -1,0 +1,50 @@
+{
+    "tiles": {
+        "obstacles": {
+            "layer": "collision",
+            "number": {"min": 3, "max": 5},
+            "sizes": [{"x": 1, "y": 1}, {"x": 1, "y": 2}, {"x": 1, "y": 3}, {"x": 2, "y": 1}, {"x": 3, "y": 1}],
+            "possible_tiles": [35, 37]
+        }
+    },
+    "prefabs": {
+        "enemies": {
+            "number": {"min": 5, "max": 6},
+            "possible_prefabs": [
+                {
+                    "prefab": "enemy",
+                    "properties": {}
+                }
+            ]
+        },
+        "items": {
+            "number": {"min": 1, "max": 1},
+            "possible_prefabs": [
+                {
+                    "prefab": "item",
+                    "properties": {
+                        "texture": "attack_image", "collect_item.stat": "attack", "collect_item.value": 1
+                    }
+                },
+                {
+                    "prefab": "item",
+                    "properties": {
+                        "texture": "shoot_rate_image", "collect_item.stat": "shoot_rate", "collect_item.value": 1
+                    }
+                },
+                {
+                    "prefab": "item",
+                    "properties": {
+                        "texture": "speed_image", "collect_item.stat": "speed", "collect_item.value": 0.1
+                    }
+                },
+                {
+                    "prefab": "item",
+                    "properties": {
+                        "texture": "heart_image", "collect_item.stat": "health", "collect_item.value": 1
+                    }
+                }
+            ]
+        }
+    }
+}

@@ -21,5 +21,5 @@ DungeonExplorer.TitleState.prototype.init = function (level_data) {
 
 DungeonExplorer.TitleState.prototype.start_game = function () {
     "use strict";
-    this.game.state.start("DungeonState", true, false, 10);
+    this.game.state.start("DungeonState", true, false, 1);
 };

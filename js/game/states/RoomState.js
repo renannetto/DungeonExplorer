@@ -26,6 +26,8 @@ DungeonExplorer.RoomState.prototype.init = function (level_data, extra_parameter
 
     this.room = extra_parameters.room;
 
+    this.current_level = extra_parameters.current_level || this.current_level;
+
     this.player_position = this.player_position || new Phaser.Point(this.game.world.width / 2, this.game.world.height / 2);
 
     this.cleared_rooms = this.cleared_rooms || [];

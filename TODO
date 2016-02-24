@@ -1,11 +1,11 @@
+dungeon state with JSON file containing the room level and population file (will require BootState and LoadingState)
+save game stats (killed enemies, collected items, ...)
 show mini map
 improve enemies AI (behavior tree?)
-increase difficulty when clearing levels
 add items that change gameplay
 refactor JSONLevelState and SpriteFactory code to set sprite properties
 placing items and player over obstacles
 fix enemies pathfinding
 fix damage bouncing to respect physics
 fix player shooting (can't keep pressing spacebar to shoot faster)
-dungeon state with JSON file containing the room level and population file (will require BootState and LoadingState)
 allow multiple callbacks for each key in user input
