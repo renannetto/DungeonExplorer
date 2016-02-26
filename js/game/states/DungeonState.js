@@ -1,9 +1,10 @@
 var Phaser = Phaser || {};
+var Engine = Engine || {};
 var DungeonExplorer = DungeonExplorer || {};
 
 DungeonExplorer.DungeonState = function () {
     "use strict";
-    Phaser.State.call(this);
+    Engine.JsonLevelState.call(this);
 
     this.LEVEL_FILE = "assets/levels/room_level.json";
     this.POPULATIONS = [
@@ -16,12 +17,16 @@ DungeonExplorer.DungeonState = function () {
     ];
 };
 
-DungeonExplorer.DungeonState.prototype = Object.create(Phaser.State.prototype);
+DungeonExplorer.DungeonState.prototype = Object.create(Engine.JsonLevelState.prototype);
 DungeonExplorer.DungeonState.prototype.constructor = DungeonExplorer.DungeonState;
 
-DungeonExplorer.DungeonState.prototype.init = function (level) {
+DungeonExplorer.DungeonState.prototype.init = function (level_data, extra_parameters) {
     "use strict";
-    this.level = level;
+    Engine.LevelState.prototype.init.call(this, level_data);
+
+    this.prefab_factory = new Engine.PrefabFactory(this, new DungeonExplorer.ScriptFactory(this));
+
+    this.level = extra_parameters.level;
     this.dungeon = this.dungeon || new DungeonExplorer.Dungeon(this);
 };
 
@@ -35,14 +40,17 @@ DungeonExplorer.DungeonState.prototype.preload = function () {
 DungeonExplorer.DungeonState.prototype.create = function () {
     "use strict";
     var initial_room, population, stats;
-    if (this.level > this.NUMBER_OF_ROOMS.length) {
+    Engine.JsonLevelState.prototype.create.call(this);
+
+    if (!this.game_stats) {
+        this.game_stats = this.create_prefab("game_stats", "game_stats", {x: 0, y: 0}, {});
+    }
+
+    if (this.level <= this.NUMBER_OF_ROOMS.length) {
         population = JSON.parse(this.game.cache.getText("population" + this.level));
         initial_room = this.dungeon.generate_dungeon(this.NUMBER_OF_ROOMS[this.level - 1], population);
-        this.game.state.start("BootState", true, false, "RoomState", this.LEVEL_FILE, {room: initial_room, current_level: this.level});
+        this.game.state.start("BootState", true, false, "RoomState", this.LEVEL_FILE, {room: initial_room, current_level: this.level, game_stats: this.game_stats});
     } else {
-        stats = [
-            {prefab_name: "killed_enemies_label", value: 10}
-        ];
-        this.game.state.start("BootState", true, false, "GameOverState", "assets/levels/game_over.json", {stats: stats});
+        this.game.state.start("BootState", true, false, "GameOverState", "assets/levels/game_over.json", {game_stats: this.game_stats});
     }
 };

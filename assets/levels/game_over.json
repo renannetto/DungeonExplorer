@@ -26,7 +26,7 @@
                 "text": "You reached the\n end of the dungeon"
             }
         },
-        "killed_enemies_label": {
+        "killed_enemies": {
             "type": "text",
             "position": {"x": 240, "y": 300},
             "properties": {

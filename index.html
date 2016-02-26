@@ -74,6 +74,7 @@
         <script src="js/game/scripts/HUD/ShowStatWithSprite.js"></script>
         <script src="js/game/scripts/HUD/ShowStatWithText.js"></script>
         <script src="js/game/scripts/HUD/ShowGameOver.js"></script>
+        <script src="js/game/scripts/HUD/SaveGameStats.js"></script>
 
         <script src="js/game/scripts/UI/NavigateMenu.js"></script>
 
@@ -101,7 +102,6 @@
             game.state.add("TitleState", new DungeonExplorer.TitleState());
             game.state.add("GameOverState", new DungeonExplorer.GameOverState());
             game.state.start("BootState", true, false, "TitleState", "assets/levels/title_screen.json");
-            //game.state.start("DungeonState", true, false, 10);
         </script>
 	</body>
 </html>

@@ -1,8 +1,9 @@
+create signals to custom events (achievements?)
 dungeon state with JSON file containing the room level and population file (will require BootState and LoadingState)
-save game stats (killed enemies, collected items, ...)
 show mini map
 improve enemies AI (behavior tree?)
 add items that change gameplay
+exit is not reloaded when in a cleared room
 refactor JSONLevelState and SpriteFactory code to set sprite properties
 placing items and player over obstacles
 fix enemies pathfinding

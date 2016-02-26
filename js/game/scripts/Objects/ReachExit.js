@@ -13,6 +13,6 @@ DungeonExplorer.ReachExit.prototype.constructor = DungeonExplorer.ReachExit;
 DungeonExplorer.ReachExit.prototype.reach_exit = function () {
     "use strict";
     if (!this.locked) {
-        this.game_state.game.state.start("DungeonState", true, false, this.game_state.current_level + 1);
+        this.game_state.game.state.start("BootState", true, false, "DungeonState", "assets/levels/dungeon.json", {level: this.game_state.current_level + 1});
     }
 };

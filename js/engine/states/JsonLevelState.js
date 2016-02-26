@@ -64,6 +64,7 @@ Engine.JsonLevelState.prototype.create_prefab = function (type, name, position, 
         }
     }
     prefab.init();
+    return prefab;
 };
 
 Engine.JsonLevelState.prototype.update = function () {

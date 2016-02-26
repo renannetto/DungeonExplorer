@@ -28,6 +28,8 @@ DungeonExplorer.RoomState.prototype.init = function (level_data, extra_parameter
 
     this.current_level = extra_parameters.current_level || this.current_level;
 
+    this.game_stats = extra_parameters.game_stats || this.game_stats;
+
     this.player_position = this.player_position || new Phaser.Point(this.game.world.width / 2, this.game.world.height / 2);
 
     this.cleared_rooms = this.cleared_rooms || [];
@@ -82,6 +84,8 @@ DungeonExplorer.RoomState.prototype.create = function () {
     this.prefabs.pause_menu.scripts.navigate_menu.show(false);
     
     this.restore_persistent_data();
+
+    this.game_stats.scripts.save_game_stats.listen_to_events(this.groups);
 };
 
 DungeonExplorer.RoomState.prototype.restore_persistent_data = function () {

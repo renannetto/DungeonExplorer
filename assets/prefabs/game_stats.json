@@ -1,0 +1,17 @@
+{
+    "sprite": {
+        "type": "sprite",
+        "texture": {"type": "asset_key", "asset_key": ""},
+        "group": "hud",
+        "properties": {
+            "visible": false
+        }
+    },
+    "scripts": {
+        "save_game_stats": {
+            "listeners": [
+                {"group": "enemies", "signal": "onKilled", "stat_name": "killed_enemies", "value": 1}
+            ]
+        }
+    }
+}

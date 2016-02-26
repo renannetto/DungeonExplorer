@@ -1,0 +1,9 @@
+{
+    "world": {"origin_x": 0, "origin_y": 0, "width": 480, "height": 480},
+    "assets": {
+        "game_stats": { "type": "prefab", "source": "assets/prefabs/game_stats.json" }
+    },
+    "groups": [
+        "hud"
+    ]
+}

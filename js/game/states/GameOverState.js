@@ -18,17 +18,20 @@ DungeonExplorer.GameOverState.prototype.init = function (level_data, extra_param
 
     this.user_input = this.game.plugins.add(Engine.UserInput, this, JSON.parse(this.game.cache.getText("user_input")));
 
-    this.final_stats = extra_parameters.stats;
+    this.game_stats = extra_parameters.game_stats;
 };
 
 DungeonExplorer.GameOverState.prototype.create = function () {
     "use strict";
+    var final_stats, game_stat;
     Engine.LevelState.prototype.create.call(this);
 
-    this.final_stats.forEach(function (final_stat) {
-        console.log(this.prefabs);
-        this.prefabs[final_stat.prefab_name].sprite.text += final_stat.value;
-    }, this);
+    final_stats = this.game_stats.scripts.save_game_stats.game_stats;
+    for (game_stat in final_stats) {
+        if (final_stats.hasOwnProperty(game_stat)) {
+            this.prefabs[game_stat].sprite.text += final_stats[game_stat];
+        }
+    }
 };
 
 DungeonExplorer.GameOverState.prototype.restart_game = function () {

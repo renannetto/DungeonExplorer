@@ -21,7 +21,8 @@
         "text_stat": { "type": "prefab", "source": "assets/prefabs/text_stat.json" },
         "sprite_stat": { "type": "prefab", "source": "assets/prefabs/sprite_stat.json" },
         "menu": { "type": "prefab", "source": "assets/prefabs/menu.json" },
-        "game_over_panel": { "type": "prefab", "source": "assets/prefabs/game_over_panel.json" }
+        "game_over_panel": { "type": "prefab", "source": "assets/prefabs/game_over_panel.json" },
+        "game_stats": { "type": "prefab", "source": "assets/prefabs/game_stats.json" }
     },
     "groups": [
         "doors",
@@ -102,6 +103,11 @@
             },
             "game_over_panel": {
                 "type": "game_over_panel",
+                "position": "center",
+                "group": "hud"
+            },
+            "game_stats": {
+                "type": "game_stats",
                 "position": "center",
                 "group": "hud"
             }
