@@ -12,15 +12,8 @@ DungeonExplorer.ShowStatWithSprite.prototype.constructor = DungeonExplorer.ShowS
 
 DungeonExplorer.ShowStatWithSprite.prototype.init = function () {
     "use strict";
-    var initial_stat, stat_index, stat;
-    this.prefab.sprite.visible = false;
+    this.stat = 0;
     this.stats = [];
-    initial_stat = this.game_state.prefabs[this.prefab_to_show].scripts[this.script_to_show].stats[this.property_to_show];
-    for (stat_index = 0; stat_index < initial_stat; stat_index += 1) {
-        stat = this.create_new_stat_sprite();
-        this.stats.push(stat);
-    }
-    this.stat = initial_stat;
 };
 
 DungeonExplorer.ShowStatWithSprite.prototype.update_stat = function (new_stat) {

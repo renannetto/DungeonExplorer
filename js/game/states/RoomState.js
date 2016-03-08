@@ -46,7 +46,7 @@ DungeonExplorer.RoomState.prototype.preload = function () {
 
 DungeonExplorer.RoomState.prototype.create = function () {
     "use strict";
-    var tile_dimensions, prefab_index;
+    var tile_dimensions, prefab_name, prefab_parameters, prefab_index;
     this.map = this.game.add.tilemap(this.MAP_KEY);
     this.map.addTilesetImage(this.map.tilesets[0].name, this.MAP_TILESET);
 
@@ -54,6 +54,13 @@ DungeonExplorer.RoomState.prototype.create = function () {
     this.pathfinding = this.game.plugins.add(Engine.Pathfinding, this.map.layers[1].data, [-1], tile_dimensions);
 
     Engine.TiledState.prototype.create.call(this);
+
+    for (prefab_name in this.level_data.prefabs) {
+        if (this.level_data.prefabs.hasOwnProperty(prefab_name)) {
+            prefab_parameters = this.level_data.prefabs[prefab_name];
+            this.create_prefab(prefab_parameters.type, prefab_name, prefab_parameters.position, prefab_parameters.properties);
+        }
+    }
 
     this.create_prefab("player", "player", this.player_position, {});
 

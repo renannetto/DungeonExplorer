@@ -36,29 +36,41 @@
         "pause_hud",
         "stats"
     ],
+    "prefabs": {
+        "pause_menu": {
+            "type": "menu",
+            "position": {"x": 240, "y": 240},
+            "group": "pause_hud",
+            "properties": {
+                "navigate_menu.items_data": [{"text": "Resume", "callback": {"method": "game_state.pause", "args": [false]}}]
+            }
+        },
+        "game_over_panel": {
+            "type": "game_over_panel",
+            "position": {"x": 240, "y": 240},
+            "group": "hud"
+        },
+        "game_stats": {
+            "type": "game_stats",
+            "position": {"x": 240, "y": 240},
+            "group": "hud"
+        }
+    },
     "user_input": "assets/levels/game_user_input.json",
     "hud": {
         "margins": {"left": 20, "right": 20, "top": 20, "bottom": 20},
         "elements": {
             "player_lives": {
                 "type": "sprite_stat",
-                "position": "top_left",
+                "region": "top_left",
                 "properties": {
                     "texture": "heart_image",
                     "show_stat_with_sprite.property_to_show": "health"
                 }
             },
-            "pause_menu": {
-                "type": "menu",
-                "position": "center",
-                "group": "pause_hud",
-                "properties": {
-                    "navigate_menu.items_data": [{"text": "Resume", "callback": {"method": "game_state.pause", "args": [false]}}]
-                }
-            },
             "attack_label": {
                 "type": "sprite_stat",
-                "position": "bottom_left",
+                "region": "bottom_left",
                 "properties": {
                     "texture": "attack_image",
                     "scale": {"x": 1.5, "y": 1.5},
@@ -73,7 +85,7 @@
             },
             "shoot_rate_label": {
                 "type": "sprite_stat",
-                "position": "center_bottom",
+                "region": "center_bottom",
                 "properties": {
                     "texture": "shoot_rate_image",
                     "scale": {"x": 1.5, "y": 1.5},
@@ -88,7 +100,7 @@
             },
             "speed_label": {
                 "type": "sprite_stat",
-                "position": "bottom_right",
+                "region": "bottom_right",
                 "properties": {
                     "texture": "speed_image",
                     "scale": {"x": 1.5, "y": 1.5},
@@ -100,16 +112,6 @@
                         "anchor": {"x": 0.5, "y": 0.5}
                     }
                 }
-            },
-            "game_over_panel": {
-                "type": "game_over_panel",
-                "position": "center",
-                "group": "hud"
-            },
-            "game_stats": {
-                "type": "game_stats",
-                "position": "center",
-                "group": "hud"
             }
         }
     }
