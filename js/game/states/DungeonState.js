@@ -5,16 +5,6 @@ var DungeonExplorer = DungeonExplorer || {};
 DungeonExplorer.DungeonState = function () {
     "use strict";
     Engine.JsonLevelState.call(this);
-
-    this.LEVEL_FILE = "assets/levels/room_level.json";
-    this.POPULATIONS = [
-        {level: 1, file: "assets/levels/population1.json"},
-        {level: 2, file: "assets/levels/population2.json"}
-    ];
-    this.NUMBER_OF_ROOMS = [
-        10,
-        15
-    ];
 };
 
 DungeonExplorer.DungeonState.prototype = Object.create(Engine.JsonLevelState.prototype);
@@ -26,15 +16,18 @@ DungeonExplorer.DungeonState.prototype.init = function (level_data, extra_parame
 
     this.prefab_factory = new Engine.PrefabFactory(this, new DungeonExplorer.ScriptFactory(this));
 
-    this.level = extra_parameters.level;
+    this.current_level = extra_parameters.level;
+    if (this.current_level > this.level_data.levels.length) {
+        this.game_over();
+    }
+    this.current_level_data = this.level_data.levels[this.current_level - 1];
+
     this.dungeon = this.dungeon || new DungeonExplorer.Dungeon(this);
 };
 
 DungeonExplorer.DungeonState.prototype.preload = function () {
     "use strict";
-    this.POPULATIONS.forEach(function (population) {
-        this.load.text("population" + population.level, population.file);
-    }, this);
+    this.load.text("population", this.current_level_data.population_file);
 };
 
 DungeonExplorer.DungeonState.prototype.create = function () {
@@ -46,11 +39,12 @@ DungeonExplorer.DungeonState.prototype.create = function () {
         this.game_stats = this.create_prefab("game_stats", "game_stats", {x: 0, y: 0}, {});
     }
 
-    if (this.level <= this.NUMBER_OF_ROOMS.length) {
-        population = JSON.parse(this.game.cache.getText("population" + this.level));
-        initial_room = this.dungeon.generate_dungeon(this.NUMBER_OF_ROOMS[this.level - 1], population);
-        this.game.state.start("BootState", true, false, "RoomState", this.LEVEL_FILE, {room: initial_room, current_level: this.level, game_stats: this.game_stats});
-    } else {
-        this.game.state.start("BootState", true, false, "GameOverState", "assets/levels/game_over.json", {game_stats: this.game_stats});
-    }
+    population = JSON.parse(this.game.cache.getText("population"));
+    initial_room = this.dungeon.generate_dungeon(this.current_level_data.number_of_rooms, population);
+    this.game.state.start("BootState", true, false, "RoomState", this.level_data.level_files.room, {room: initial_room, current_level: this.current_level, game_stats: this.game_stats});
+};
+
+DungeonExplorer.DungeonState.prototype.game_over = function () {
+    "use strict";
+    this.game.state.start("BootState", true, false, "GameOverState", this.level_data.level_files.game_over, {game_stats: this.game_stats});
 };

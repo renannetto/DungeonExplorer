@@ -1,5 +1,4 @@
 create signals to custom events (achievements?)
-dungeon state with JSON file containing the room level and population file (will require BootState and LoadingState)
 show mini map
 improve enemies AI (behavior tree?)
 add items that change gameplay

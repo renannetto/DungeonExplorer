@@ -5,5 +5,13 @@
     },
     "groups": [
         "hud"
+    ],
+    "level_files": {
+        "room": "assets/levels/room_level.json",
+        "game_over": "assets/levels/game_over.json"
+    },
+    "levels": [
+        {"level": 1, "population_file": "assets/levels/population1.json", "number_of_rooms": 10},
+        {"level": 2, "population_file": "assets/levels/population2.json", "number_of_rooms": 15}
     ]
 }
