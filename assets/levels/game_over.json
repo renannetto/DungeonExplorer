@@ -25,14 +25,6 @@
                 "fontSize": 30,
                 "text": "You reached the\n end of the dungeon"
             }
-        },
-        "killed_enemies": {
-            "type": "text",
-            "position": {"x": 240, "y": 300},
-            "properties": {
-                "fontSize": 24,
-                "text": "Killed enemies: "
-            }
         }
     }
 }

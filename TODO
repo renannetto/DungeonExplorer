@@ -1,5 +1,5 @@
-create signals to custom events (achievements?)
 show mini map
+create achivements system
 improve enemies AI (behavior tree?)
 add items that change gameplay
 exit is not reloaded when in a cleared room

@@ -25,13 +25,7 @@ DungeonExplorer.GameOverState.prototype.create = function () {
     "use strict";
     var final_stats, game_stat;
     Engine.LevelState.prototype.create.call(this);
-
-    final_stats = this.game_stats.scripts.save_game_stats.game_stats;
-    for (game_stat in final_stats) {
-        if (final_stats.hasOwnProperty(game_stat)) {
-            this.prefabs[game_stat].sprite.text += final_stats[game_stat];
-        }
-    }
+    this.game_stats.scripts.save_game_stats.show_stats(this);
 };
 
 DungeonExplorer.GameOverState.prototype.restart_game = function () {

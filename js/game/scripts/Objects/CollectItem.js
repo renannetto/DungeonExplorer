@@ -5,6 +5,8 @@ var DungeonExplorer = DungeonExplorer || {};
 DungeonExplorer.CollectItem = function (game_state, prefab, properties) {
     "use strict";
     Engine.Script.call(this, game_state, prefab, properties);
+
+    this.prefab.sprite.events.onCollected = new Phaser.Signal();
 };
 
 DungeonExplorer.CollectItem.prototype = Object.create(Engine.Script.prototype);
@@ -15,5 +17,6 @@ DungeonExplorer.CollectItem.prototype.collect_item = function (item, player) {
     var player_prefab;
     player_prefab = this.game_state.prefabs[player.name];
     player_prefab.scripts.player_stats.stats[this.stat] += this.value;
+    this.prefab.sprite.events.onCollected.dispatch(this.prefab.sprite);
     this.prefab.kill();
 };
