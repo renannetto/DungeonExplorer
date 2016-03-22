@@ -1,7 +1,7 @@
 {
     "world": {"origin_x": 0, "origin_y": 0, "width": 480, "height": 480},
     "assets": {
-        "game_stats": { "type": "prefab", "source": "assets/prefabs/game_stats.json" }
+
     },
     "groups": [
         "hud"
@@ -13,5 +13,25 @@
     "levels": [
         {"level": 1, "population_file": "assets/levels/population1.json", "number_of_rooms": 10},
         {"level": 2, "population_file": "assets/levels/population2.json", "number_of_rooms": 15}
-    ]
+    ],
+    "game_stats": {
+        "game_stats": {
+            "killed_enemies": {
+                "text": "Killed enemies: ",
+                "value": 0,
+                "prefab": "game_stat",
+                "position": {"x": 240, "y": 300}
+            },
+            "collected_items": {
+                "text": "Collected items: ",
+                "value": 0,
+                "prefab": "game_stat",
+                "position": {"x": 240, "y": 350}
+            }
+        },
+        "listeners": [
+            {"group": "enemies", "signal": "onKilled", "stat_name": "killed_enemies", "value": 1},
+            {"group": "items", "signal": "onCollected", "stat_name": "collected_items", "value": 1}
+        ]
+    }
 }

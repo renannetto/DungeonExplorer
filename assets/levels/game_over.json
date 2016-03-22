@@ -2,7 +2,8 @@
     "world": {"origin_x": 0, "origin_y": 0, "width": 480, "height": 480},
     "assets": {
         "text": { "type": "prefab", "source": "assets/prefabs/text.json" },
-        "menu": { "type": "prefab", "source": "assets/prefabs/menu.json" }
+        "menu": { "type": "prefab", "source": "assets/prefabs/menu.json" },
+        "game_stat": { "type": "prefab", "source": "assets/prefabs/game_stat.json" }
     },
     "groups": [
         "hud",

@@ -36,7 +36,7 @@ DungeonExplorer.DungeonState.prototype.create = function () {
     Engine.JsonLevelState.prototype.create.call(this);
 
     if (!this.game_stats) {
-        this.game_stats = this.create_prefab("game_stats", "game_stats", {x: 0, y: 0}, {});
+        this.game_stats = this.game.plugins.add(Engine.GameStats, this, this.level_data.game_stats);
     }
 
     population = JSON.parse(this.game.cache.getText("population"));

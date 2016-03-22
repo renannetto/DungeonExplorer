@@ -1,0 +1,17 @@
+{
+    "sprite": {
+        "type": "text",
+        "text": "",
+        "style": {
+            "font": "32px Arial",
+            "fill": "#FFFFFF"
+        },
+        "group": "hud",
+        "properties": {
+            "anchor": {"x": 0.5, "y": 0.5}
+        }
+    },
+    "scripts": {
+
+    }
+}

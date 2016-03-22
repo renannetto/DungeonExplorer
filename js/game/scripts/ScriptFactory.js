@@ -19,8 +19,7 @@ DungeonExplorer.ScriptFactory = function (game_state) {
         "player_stats": Engine.Script.prototype.constructor,
         "navigate_menu": DungeonExplorer.NavigateMenu.prototype.constructor,
         "collect_item": DungeonExplorer.CollectItem.prototype.constructor,
-        "show_game_over": DungeonExplorer.ShowGameOver.prototype.constructor,
-        "save_game_stats": DungeonExplorer.SaveGameStats.prototype.constructor
+        "show_game_over": DungeonExplorer.ShowGameOver.prototype.constructor
     };
 };
 

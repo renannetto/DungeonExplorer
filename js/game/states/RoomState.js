@@ -92,7 +92,7 @@ DungeonExplorer.RoomState.prototype.create = function () {
     
     this.restore_persistent_data();
 
-    this.game_stats.scripts.save_game_stats.listen_to_events(this.groups);
+    this.game_stats.listen_to_events(this.groups);
 };
 
 DungeonExplorer.RoomState.prototype.restore_persistent_data = function () {
