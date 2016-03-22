@@ -1,5 +1,5 @@
 show mini map
-create achivements system
+improve persistent data between sates (saving the prefabs and reloading them)
 improve enemies AI (behavior tree?)
 add items that change gameplay
 exit is not reloaded when in a cleared room
