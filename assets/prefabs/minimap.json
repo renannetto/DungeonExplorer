@@ -1,0 +1,17 @@
+{
+    "sprite": {
+        "type": "sprite",
+        "texture": {"type": "bitmap", "width": 100, "height": 100, "color": "#000000"},
+        "group": "hud",
+        "properties": {
+            "alpha": 0.5,
+            "anchor": {"x": 0.5, "y": 0.5}
+        }
+    },
+    "scripts": {
+        "show_minimap": {
+            "room_prefab": "minimap_room",
+            "room_dimensions": {"x": 12, "y": 12}
+        }
+    }
+}

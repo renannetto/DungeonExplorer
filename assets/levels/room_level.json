@@ -21,7 +21,9 @@
         "text_stat": { "type": "prefab", "source": "assets/prefabs/text_stat.json" },
         "sprite_stat": { "type": "prefab", "source": "assets/prefabs/sprite_stat.json" },
         "menu": { "type": "prefab", "source": "assets/prefabs/menu.json" },
-        "game_over_panel": { "type": "prefab", "source": "assets/prefabs/game_over_panel.json" }
+        "game_over_panel": { "type": "prefab", "source": "assets/prefabs/game_over_panel.json" },
+        "minimap": { "type": "prefab", "source": "assets/prefabs/minimap.json" },
+        "minimap_room": { "type": "prefab", "source": "assets/prefabs/minimap_room.json" }
     },
     "groups": [
         "doors",
@@ -48,6 +50,10 @@
             "type": "game_over_panel",
             "position": {"x": 240, "y": 240},
             "group": "hud"
+        },
+        "minimap": {
+            "type": "minimap",
+            "position": {"x": 400, "y": 80}
         }
     },
     "user_input": "assets/levels/game_user_input.json",

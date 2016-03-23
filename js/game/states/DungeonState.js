@@ -41,7 +41,7 @@ DungeonExplorer.DungeonState.prototype.create = function () {
 
     population = JSON.parse(this.game.cache.getText("population"));
     initial_room = this.dungeon.generate_dungeon(this.current_level_data.number_of_rooms, population);
-    this.game.state.start("BootState", true, false, "RoomState", this.level_data.level_files.room, {room: initial_room, current_level: this.current_level, game_stats: this.game_stats});
+    this.game.state.start("BootState", true, false, "RoomState", this.level_data.level_files.room, {room: initial_room, current_level: this.current_level, game_stats: this.game_stats, dungeon: this.dungeon});
 };
 
 DungeonExplorer.DungeonState.prototype.game_over = function () {

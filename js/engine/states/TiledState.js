@@ -24,7 +24,7 @@ Engine.TiledState.prototype.create = function () {
     this.map.layers.forEach(function (layer) {
         this.layers[layer.name] = this.map.createLayer(layer.name);
         if (layer.properties.collision) {
-            this.set_collision_to_layer(layer);
+            this.map.setCollisionByExclusion([-1], true, layer.name);
         }
     }, this);
     this.layers[this.map.layer.name].resizeWorld();
@@ -36,20 +36,6 @@ Engine.TiledState.prototype.create = function () {
             this.map.objects[object_layer].forEach(this.create_object, this);
         }
     }
-};
-
-Engine.TiledState.prototype.set_collision_to_layer = function (layer) {
-    "use strict";
-    var collision_tiles;
-    collision_tiles = [];
-    layer.data.forEach(function (data_row) {
-        data_row.forEach(function (tile) {
-            if (tile.index > 0 && collision_tiles.indexOf(tile.index) === -1) {
-                collision_tiles.push(tile.index);
-            }
-        }, this);
-    }, this);
-    this.map.setCollision(collision_tiles, true, layer.name);
 };
 
 Engine.TiledState.prototype.create_object = function (object) {

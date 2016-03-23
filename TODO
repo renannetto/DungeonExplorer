@@ -1,5 +1,6 @@
-show mini map
-improve persistent data between sates (saving the prefabs and reloading them)
+hide unvisited rooms in minimap
+show only rooms that fit in the minimap area
+better way of saving persistent data between sates (saving the prefabs and reloading them)
 improve enemies AI (behavior tree?)
 add items that change gameplay
 exit is not reloaded when in a cleared room

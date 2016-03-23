@@ -1,0 +1,14 @@
+{
+    "sprite": {
+        "type": "sprite",
+        "texture": {"type": "bitmap", "width": 10, "height": 10, "color": "#FFFF00"},
+        "group": "hud",
+        "properties": {
+            "alpha": 0.5,
+            "anchor": {"x": 0.5, "y": 0.5}
+        }
+    },
+    "scripts": {
+
+    }
+}

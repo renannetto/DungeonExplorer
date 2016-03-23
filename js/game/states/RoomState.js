@@ -30,6 +30,8 @@ DungeonExplorer.RoomState.prototype.init = function (level_data, extra_parameter
 
     this.game_stats = extra_parameters.game_stats || this.game_stats;
 
+    this.dungeon = extra_parameters.dungeon || this.dungeon;
+
     this.player_position = this.player_position || new Phaser.Point(this.game.world.width / 2, this.game.world.height / 2);
 
     this.cleared_rooms = this.cleared_rooms || [];
@@ -67,7 +69,6 @@ DungeonExplorer.RoomState.prototype.create = function () {
     this.room.tiles.forEach(function (tile) {
         this.map.putTile(tile.tile, tile.position.x, tile.position.y, tile.layer);
     }, this);
-    this.set_collision_to_layer(this.layers.collision.layer);
 
     if (this.cleared_rooms.indexOf(this.room.template_name()) === -1) {
         for (prefab_index = 0; prefab_index < this.room.prefabs.length; prefab_index += 1) {
