@@ -11,7 +11,10 @@
     "scripts": {
         "show_minimap": {
             "room_prefab": "minimap_room",
-            "room_dimensions": {"x": 12, "y": 12}
+            "room_dimensions": {"x": 10, "y": 10},
+            "room_spacing": {"x": 2, "y": 2},
+            "room_color": "#FFFF00",
+            "current_room_color": "#0000FF"
         }
     }
 }

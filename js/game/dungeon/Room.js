@@ -6,6 +6,7 @@ DungeonExplorer.Room = function (game_state, coordinate, tile_dimensions) {
     this.game_state = game_state;
     this.coordinate = coordinate;
     this.tile_dimensions = tile_dimensions;
+    this.cleared = false;
 
     this.population = [];
     this.neighbors = {};
@@ -129,4 +130,9 @@ DungeonExplorer.Room.prototype.is_free = function (region) {
         }
     }
     return true;
+};
+
+DungeonExplorer.Room.prototype.clear = function () {
+    "use strict";
+    this.cleared = true;
 };

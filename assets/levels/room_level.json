@@ -22,8 +22,7 @@
         "sprite_stat": { "type": "prefab", "source": "assets/prefabs/sprite_stat.json" },
         "menu": { "type": "prefab", "source": "assets/prefabs/menu.json" },
         "game_over_panel": { "type": "prefab", "source": "assets/prefabs/game_over_panel.json" },
-        "minimap": { "type": "prefab", "source": "assets/prefabs/minimap.json" },
-        "minimap_room": { "type": "prefab", "source": "assets/prefabs/minimap_room.json" }
+        "minimap": { "type": "prefab", "source": "assets/prefabs/minimap.json" }
     },
     "groups": [
         "doors",
